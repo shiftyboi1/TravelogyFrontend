@@ -14,11 +14,14 @@ export default function Index() {
         backgroundColor: Colors[colorScheme ?? "light"].background,
       }}
     >
-      <ThemedText type="title" darkColor={Colors.dark.primary}>
+      <ThemedText type="header" darkColor={Colors.dark.secondary}>
         Ashley
       </ThemedText>
       <ThemedText type="default">
         Big
+      </ThemedText>
+      <ThemedText type="title">
+        jestem tytułem
       </ThemedText>
       <ThemedText type="defaultBold">
         nay, LARGE

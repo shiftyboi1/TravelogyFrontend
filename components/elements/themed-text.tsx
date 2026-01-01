@@ -24,8 +24,8 @@ export function ThemedText({
     style = {[
       {color},
       type ==='default' ? {fontSize:FontSizes.default} : undefined,
-      type ==='header' ? {fontSize:FontSizes.title, fontWeight:'bold'} : undefined,
-      type ==='title' ? {fontSize:FontSizes.header, fontWeight:'bold'} : undefined,
+      type ==='header' ? {fontSize:FontSizes.header, fontWeight:'bold'} : undefined,
+      type ==='title' ? {fontSize:FontSizes.title, fontWeight:'bold'} : undefined,
       type ==='defaultBold' ? {fontSize:FontSizes.default, fontWeight:'600'} : undefined,
       type ==='subtitle' ? {fontSize:FontSizes.subtitle} : undefined,
       type ==='link' ? {fontSize:FontSizes.default, color:'#0a7ea4'} : undefined,

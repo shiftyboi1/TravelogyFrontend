@@ -18,7 +18,7 @@ export const Colors = {
 
 export const FontSizes = {
   header: 40,
-  title: 36,
+  title: 30,
   default: 24,
   subtitle: 20
 }
