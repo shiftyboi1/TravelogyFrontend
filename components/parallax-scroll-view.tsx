@@ -29,6 +29,7 @@ export default function ParallaxScrollView({
   const scrollOffset = useScrollOffset(scrollRef);
   const headerAnimatedStyle = useAnimatedStyle(() => {
     return {
+      // The interpolation from, ex, [2,1,1], makes it so that the img scales from the first to the second valuess, and does nothing from the second to the third.
       transform: [
         {
           translateY: interpolate(
