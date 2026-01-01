@@ -15,3 +15,9 @@ export const Colors = {
     secondary: '#6200EE',
   }
 }
+
+export const FontSizes = {
+  title: 40,
+  default: 24,
+  subtitle: 20
+}
