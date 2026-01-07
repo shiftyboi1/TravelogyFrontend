@@ -1,9 +1,18 @@
 import { ThemedText } from "@/components/elements/themed-text";
 import { Colors } from "@/constants/theme";
 import { useColorScheme, View } from "react-native";
+import { SvgUri } from 'react-native-svg';
 
 export default function Index() {
   const colorScheme = useColorScheme();
+
+  //TODO: fake clickable textfield
+  //TODO: dropdown menu with varied string entries
+  //TODO: Search button
+  //TODO: left/right choice thing (single choice in a row, underlines)
+  //TODO: entry in saved list
+  //TODO: Saved list
+  //TODO: Search land
 
   return (
     <View
@@ -15,7 +24,7 @@ export default function Index() {
       }}
     >
       <ThemedText type="header" darkColor={Colors.dark.secondary}>
-        Ashley
+        67
       </ThemedText>
       <ThemedText type="default">
         Big
@@ -32,6 +41,12 @@ export default function Index() {
       <ThemedText type="subtitle">
         I have paws
       </ThemedText>
+
+      <SvgUri
+        uri="@/assets/icons/search.svg" // TODO: like make the svg rendering work please thank you https://blog.logrocket.com/use-svgs-react-native-tutorial/
+      />
+
+      {/* <ThemedSvg icon={SearchIcon}/> */}
     </View>
   );
 }
