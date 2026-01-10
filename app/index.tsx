@@ -1,6 +1,6 @@
 import SearchIcon from "@/assets/svg/icons/Search";
-import { ThemedSvg } from "@/components/elements/themed-svg";
-import { ThemedText } from "@/components/elements/themed-text";
+import { ThemedSvg } from "@/components/themed-svg";
+import { ThemedText } from "@/components/themed-text";
 import { Colors } from "@/constants/theme";
 import { useColorScheme, View } from "react-native";
 
