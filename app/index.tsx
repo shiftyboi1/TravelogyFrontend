@@ -43,7 +43,7 @@ export default function Index() {
         I have paws
       </ThemedText>
 
-      <ThemedSvg icon={SearchIcon} />
+      <ThemedSvg icon={SearchIcon} size={24} />
     </View>
   );
 }
