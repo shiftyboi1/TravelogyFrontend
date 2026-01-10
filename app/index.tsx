@@ -1,7 +1,8 @@
+import SearchIcon from "@/assets/svg/icons/Search";
+import { ThemedSvg } from "@/components/elements/themed-svg";
 import { ThemedText } from "@/components/elements/themed-text";
 import { Colors } from "@/constants/theme";
 import { useColorScheme, View } from "react-native";
-import { SvgUri } from 'react-native-svg';
 
 export default function Index() {
   const colorScheme = useColorScheme();
@@ -42,11 +43,7 @@ export default function Index() {
         I have paws
       </ThemedText>
 
-      <SvgUri
-        uri="@/assets/icons/search.svg" // TODO: like make the svg rendering work please thank you https://blog.logrocket.com/use-svgs-react-native-tutorial/
-      />
-
-      {/* <ThemedSvg icon={SearchIcon}/> */}
+      <ThemedSvg icon={SearchIcon} />
     </View>
   );
 }
