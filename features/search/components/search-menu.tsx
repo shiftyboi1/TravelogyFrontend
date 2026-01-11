@@ -7,6 +7,11 @@ import { SearchTrigger } from "./search-trigger";
 export function SearchMenu() {
   const { searchedTerm, setSearchedTerm } = useSearchContext();
   
+  // TODO: One-of-two selector for city/country
+  // TODO: Dropdown menu for type of transportation
+  // TODO: Search button
+  // TODO: Style
+
   return (
     <ThemedView lightColor={Colors.light.primary} darkColor={Colors.dark.primary} style={styles.container}>
       <SearchTrigger style={{ margin: 16 }} searchedTerm={searchedTerm} />
