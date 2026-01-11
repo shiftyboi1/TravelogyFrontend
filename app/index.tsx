@@ -1,4 +1,3 @@
-import { ThemedText } from "@/components/themed-text";
 import { Colors } from "@/constants/theme";
 import { SearchMenu } from "@/features/search/components/search-menu";
 import { useColorScheme, View } from "react-native";
@@ -19,13 +18,10 @@ export default function Index() {
       style={{
         flex: 1,
         justifyContent: "center",
-        backgroundColor: Colors[colorScheme ?? "light"].primary,
+        backgroundColor: Colors[colorScheme ?? "light"].background,
       }}
     >
-      <ThemedText type="subtitle">
-        I have paws
-      </ThemedText>
-
+    
       <SearchMenu />
 
     </View>
