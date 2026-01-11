@@ -1,6 +1,6 @@
 import { ThemedText } from "@/components/themed-text";
 import { Colors } from "@/constants/theme";
-import { SearchTrigger } from "@/features/search/components/search-trigger";
+import { SearchMenu } from "@/features/search/components/search-menu";
 import { useColorScheme, View } from "react-native";
 
 export default function Index() {
@@ -26,7 +26,8 @@ export default function Index() {
         I have paws
       </ThemedText>
 
-      <SearchTrigger/>
+      <SearchMenu />
+
     </View>
   );
 }

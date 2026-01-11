@@ -3,16 +3,16 @@ import { ThemedSvg } from "@/components/themed-svg";
 import { ThemedText } from "@/components/themed-text";
 import { ThemedView } from "@/components/themed-view";
 import { useRouter } from "expo-router";
-import { Pressable, StyleSheet } from "react-native";
+import { Pressable, StyleSheet, type StyleProp, type ViewStyle } from "react-native";
 
-export function SearchTrigger({ searchedTerm }: { searchedTerm?: string }) {
+export function SearchTrigger({ searchedTerm, style }: { searchedTerm?: string; style?: StyleProp<ViewStyle> }) {
   const router = useRouter();
   
   return (
-    <Pressable onPress={() => router.push("/search")}>
+    <Pressable onPress={() => router.push("/search")} style={style}>
       <ThemedView type="textInputContainer">
-        <ThemedSvg icon={SearchIcon} size={30} style={styles.icon} />
-        <ThemedText type="title" style={searchedTerm ? undefined : styles.placeholder}>{searchedTerm || "Search"}</ThemedText>
+        <ThemedSvg icon={SearchIcon} size={24} style={styles.icon} />
+        <ThemedText type="default" style={searchedTerm ? undefined : styles.placeholder}>{searchedTerm || "Search"}</ThemedText>
       </ThemedView>
     </Pressable>
   );
@@ -20,7 +20,7 @@ export function SearchTrigger({ searchedTerm }: { searchedTerm?: string }) {
 
 const styles = StyleSheet.create({
   icon: {
-    marginRight: 16,
+    margin: 16,
   },
   placeholder: {
     opacity: 0.5,

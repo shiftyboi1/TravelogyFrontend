@@ -16,10 +16,10 @@ export function ThemedView({ style, lightColor, darkColor, type, ...otherProps }
       flexDirection: "row",
       alignItems: "center",
       justifyContent: "flex-start",
-      padding: 16,
+      padding: 0,
       borderRadius: 16,
       width: '100%',
-      height: 70
+      height: 60
     } : undefined,
     style
   ]} {...otherProps} />;
