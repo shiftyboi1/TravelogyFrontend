@@ -1,7 +1,6 @@
-import SearchIcon from "@/assets/svg/icons/Search";
-import { ThemedSvg } from "@/components/themed-svg";
 import { ThemedText } from "@/components/themed-text";
 import { Colors } from "@/constants/theme";
+import { SearchTrigger } from "@/features/search/components/search-trigger";
 import { useColorScheme, View } from "react-native";
 
 export default function Index() {
@@ -20,30 +19,14 @@ export default function Index() {
       style={{
         flex: 1,
         justifyContent: "center",
-        alignItems: "center",
-        backgroundColor: Colors[colorScheme ?? "light"].background,
+        backgroundColor: Colors[colorScheme ?? "light"].primary,
       }}
     >
-      <ThemedText type="header" darkColor={Colors.dark.secondary}>
-        67
-      </ThemedText>
-      <ThemedText type="default">
-        Big
-      </ThemedText>
-      <ThemedText type="title">
-        jestem tytułem
-      </ThemedText>
-      <ThemedText type="defaultBold">
-        nay, LARGE
-      </ThemedText>
-      <ThemedText type="link">
-        I have paws
-      </ThemedText>
       <ThemedText type="subtitle">
         I have paws
       </ThemedText>
 
-      <ThemedSvg icon={SearchIcon} size={24} />
+      <SearchTrigger/>
     </View>
   );
 }
