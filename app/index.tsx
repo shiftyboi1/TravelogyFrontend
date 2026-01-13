@@ -1,4 +1,5 @@
 import { Colors } from "@/constants/theme";
+import { CustomSwitch } from "@/features/search/components/custom-switch";
 import { SearchMenu } from "@/features/search/components/search-menu";
 import { useColorScheme, View } from "react-native";
 
@@ -23,6 +24,13 @@ export default function Index() {
     >
     
       <SearchMenu />
+
+      <CustomSwitch values={[
+        { label: "Option 1", value: "1" },
+        { label: "Option 2", value: "2" },
+        { label: "Option 3", value: "3" },
+      ]} 
+      backgroundColor={{ light: Colors.light.primary, dark: Colors.dark.primary }} />
 
     </View>
   );

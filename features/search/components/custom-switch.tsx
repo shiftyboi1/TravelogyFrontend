@@ -1,5 +1,7 @@
+import { ThemedText } from "@/components/themed-text";
 import { useThemeColor } from "@/hooks/useThemeColor";
-import { StyleSheet, View } from "react-native";
+import { useState } from "react";
+import { Pressable, StyleSheet, View } from "react-native";
 
 export type CustomSwitchProps = {
   values: {
@@ -16,18 +18,30 @@ export type CustomSwitchProps = {
   }
 }
 
-export const CustomSwitch = ({
+// TODO: Pass in a callback for when selection changes
+
+export function CustomSwitch({
   values,
   backgroundColor,
   selectionColor,
-}: CustomSwitchProps) => {
+}: CustomSwitchProps) {
   const bgColor = useThemeColor({ light: backgroundColor?.light, dark: backgroundColor?.dark }, "background");
   const selectColor = useThemeColor({ light: selectionColor?.light, dark: selectionColor?.dark }, "secondary");
+  if (values.length === 0) { values = [{ label: "WHOOPS" }]; }
+  const [selectedIndex, setSelectedIndex] = useState(0);
+
   return (
     <View style={[styles.container, { backgroundColor: bgColor }]}>
-      {/* TODO: Map values  */}
-      {/* TODO: Handle selection  */}
-      {/* TODO: Between lines  */}
+      {values.map((item, index) => (
+        <View key={index} style={{ flexDirection: 'row', alignItems: 'center' }}>
+          <Pressable onPress={() => setSelectedIndex(index)} style={[styles.item, (index === selectedIndex && styles.selected)]}>
+            <ThemedText>
+              {item.label}
+            </ThemedText>
+          </Pressable>
+          {index < values.length - 1 && <ThemedText style={styles.divider}>|</ThemedText>}
+        </View>
+      ))}
     </View>
   )
 }
@@ -36,8 +50,19 @@ const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'space-between',
-    padding: 4,
+    alignSelf: 'center',
+    justifyContent: 'center',
     borderRadius: 16,
-  }
+  },
+  item: {
+    paddingVertical: 8,
+    paddingHorizontal: 16,
+    borderRadius: 16,
+  },
+  selected: {
+    backgroundColor: 'blue',
+  },
+  divider: {
+    opacity: 0.5,
+  },
 });
