@@ -26,7 +26,6 @@ export default function Index() {
       <CustomSwitch values={[
         { label: "Option 1", value: "1" },
         { label: "Option 2", value: "2" },
-        { label: "Option 3", value: "3" },
       ]} 
       backgroundColor={{ light: Colors.light.primary, dark: Colors.dark.primary }} />
 
