@@ -1,10 +1,8 @@
 import { ThemedText } from "@/components/themed-text";
 import { Colors } from "@/constants/theme";
-import { CustomSwitch } from "@/features/search/components/custom-switch";
 import { SearchMenu } from "@/features/search/components/search-menu";
 import { useState } from "react";
 import { useColorScheme, View } from "react-native";
-import { Dropdown } from "react-native-element-dropdown";
 
 export default function Index() {
   const colorScheme = useColorScheme();
@@ -28,23 +26,7 @@ export default function Index() {
     >
     
       <ThemedText>{["doggo", "cato"][selectedIndex]}</ThemedText>
-
-      <CustomSwitch callback={setSelectedIndex} values={["doggo", "cato"]} 
-      backgroundColor={{ light: Colors.light.primary, dark: Colors.dark.primary }} />
-
       <SearchMenu />
-
-      <Dropdown
-        data={[
-          { label: "Option nnula", value: "0" },
-          { label: "Option jeden", value: "1" },
-        ]}
-        labelField={"label"}
-        valueField={"value"}
-        onChange={(item) => {
-          setSelectedIndex(item.value);
-        }}
-      />
 
     </View>
   );

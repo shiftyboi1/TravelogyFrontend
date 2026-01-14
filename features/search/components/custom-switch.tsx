@@ -1,4 +1,5 @@
 import { ThemedText } from "@/components/themed-text";
+import { Colors } from "@/constants/theme";
 import { useThemeColor } from "@/hooks/useThemeColor";
 import { useState } from "react";
 import { Pressable, StyleSheet, View } from "react-native";
@@ -34,7 +35,7 @@ export function CustomSwitch({
       {values.map((item, index) => (
         <View key={index} style={{ flexDirection: 'row', alignItems: 'center' }}>
           <Pressable onPress={() => { setSelectedIndex(index); callback(index); }} style={[styles.item, (index === selectedIndex && styles.selected)]}>
-            <ThemedText>
+            <ThemedText lightColor={Colors.light.textSecondary} darkColor={Colors.dark.textSecondary} order={index === selectedIndex ? 'primary' : 'secondary'}>
               {item}
             </ThemedText>
           </Pressable>
