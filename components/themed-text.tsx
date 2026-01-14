@@ -15,7 +15,7 @@ export function ThemedText({
   darkColor,
   type = 'default',
   order,
-  ...rest
+  ...props
 }: ThemedTextProps) {
   const color = useThemeColor({ light: lightColor, dark: darkColor }, order === 'secondary' ? 'textSecondary' : 'text');
   
@@ -32,7 +32,7 @@ export function ThemedText({
       type ==='link' ? {fontSize:FontSizes.default, color:'#0a7ea4'} : undefined,
       style,
     ]}
-    {...rest}
+    {...props}
     />
   )
 }

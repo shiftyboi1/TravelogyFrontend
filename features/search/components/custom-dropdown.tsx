@@ -1,29 +1,36 @@
 import { ThemedView } from "@/components/themed-view";
+import { FontSizes } from "@/constants/theme";
+import { useThemeColor } from "@/hooks/useThemeColor";
 import { useState } from "react";
 import { StyleSheet } from "react-native";
 import { Dropdown } from "react-native-element-dropdown";
 import { DropdownProps } from "react-native-element-dropdown/lib/typescript/components/Dropdown/model";
 
 export type CustomDropdownProps = DropdownProps<any> & {
-  callback: (selectedValue: any) => void;  
+  callback: (selectedValue: any) => void;
 }
 
 export function CustomDropdown({
   callback,data,
-  labelField, valueField, ...props }: CustomDropdownProps) {
+  labelField, valueField, onChange, ...props }: CustomDropdownProps) {
   const [selectedIndex, setSelectedIndex] = useState(0);
-  
+  const color = useThemeColor({}, "text");
+
   return (
     <ThemedView style={styles.container}>
       <Dropdown
+        style={styles.dropdown}
         data={data}
         labelField={labelField}
         valueField={valueField}
-        itemTextStyle={{ fontSize: 26 }}
+        itemTextStyle={styles.itemText}
+        selectedTextStyle={[styles.fieldText, { color }]}
+        placeholderStyle={[styles.fieldText, styles.placeholderText, { color }]}
         onChange={(item) => {
           setSelectedIndex(data.indexOf(item));
           callback(data.indexOf(item));
         }}
+        {...props}
       />
     </ThemedView>
   );
@@ -32,8 +39,22 @@ export function CustomDropdown({
 const styles = StyleSheet.create({
   container: {
     borderRadius: 16,
-    padding: 8,
-    height: 70,
+    padding: 0,
+    height: 60,
     justifyContent: "center",
-  }
+  },
+  dropdown: {
+    height: 60,
+  },
+  itemText: {
+    fontSize: FontSizes.default,
+  },
+  fieldText: {
+    fontSize: FontSizes.default,
+    height: 60,
+    textAlignVertical: "center",
+  },
+  placeholderText: {
+    opacity: 0.5
+  },
 });

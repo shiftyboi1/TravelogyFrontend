@@ -8,10 +8,7 @@ export default function Index() {
   const colorScheme = useColorScheme();
   const [selectedIndex, setSelectedIndex] = useState(0);
 
-  //TODO: fake clickable textfield
-  //TODO: dropdown menu with varied string entries
   //TODO: Search button
-  //TODO: left/right choice thing (single choice in a row, underlines)
   //TODO: entry in saved list
   //TODO: Saved list
   //TODO: Search land
@@ -24,8 +21,8 @@ export default function Index() {
         backgroundColor: Colors[colorScheme ?? "light"].background,
       }}
     >
-    
-      <ThemedText>{["doggo", "cato"][selectedIndex]}</ThemedText>
+
+      <ThemedText style={{textAlign: "center"}} type="header">{["Doggo", "Cato"][selectedIndex]}</ThemedText>
       <SearchMenu />
 
     </View>

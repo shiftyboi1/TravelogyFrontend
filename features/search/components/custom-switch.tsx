@@ -15,6 +15,7 @@ export type CustomSwitchProps = {
     light: string;
     dark: string;
   }
+  style?: object;
 }
 
 // TODO: Pass in a callback for when selection changes
@@ -24,6 +25,7 @@ export function CustomSwitch({
   values,
   backgroundColor,
   selectionColor,
+  style
 }: CustomSwitchProps) {
   const bgColor = useThemeColor({ light: backgroundColor?.light, dark: backgroundColor?.dark }, "background");
   const selectColor = useThemeColor({ light: selectionColor?.light, dark: selectionColor?.dark }, "secondary");
@@ -31,7 +33,7 @@ export function CustomSwitch({
   const [selectedIndex, setSelectedIndex] = useState(0);
 
   return (
-    <View style={[styles.container, { backgroundColor: bgColor }]}>
+    <View style={[styles.container, { backgroundColor: bgColor }, style]}>
       {values.map((item, index) => (
         <View key={index} style={{ flexDirection: 'row', alignItems: 'center' }}>
           <Pressable onPress={() => { setSelectedIndex(index); callback(index); }} style={[styles.item, (index === selectedIndex && styles.selected)]}>

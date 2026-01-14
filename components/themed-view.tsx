@@ -7,7 +7,7 @@ export type ThemedViewProps = ViewProps & {
   type?: 'textInputContainer';
 }
 
-export function ThemedView({style, lightColor, darkColor, type, ...otherProps }: ThemedViewProps) {
+export function ThemedView({style, lightColor, darkColor, type, ...props }: ThemedViewProps) {
   const backgroundColor = useThemeColor({ light: lightColor, dark: darkColor }, 'background');
   
   return <View style={[
@@ -22,5 +22,5 @@ export function ThemedView({style, lightColor, darkColor, type, ...otherProps }:
       height: 60
     } : undefined,
     style
-  ]} {...otherProps} />;
+  ]} {...props} />;
 }

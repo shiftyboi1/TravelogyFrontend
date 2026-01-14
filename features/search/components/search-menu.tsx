@@ -9,18 +9,16 @@ import { SearchTrigger } from "./search-trigger";
 export function SearchMenu() {
   const { searchedTerm, setSearchedTerm } = useSearchContext();
   
-  // TODO: One-of-two selector for city/country
-  // TODO: Dropdown menu for type of transportation
   // TODO: Search button
   // TODO: Style
 
   return (
-    <ThemedView lightColor={Colors.light.primary} darkColor={Colors.dark.primary} style={styles.containerView}>
-      
-      <CustomSwitch callback={() => {}} values={["doggo", "cato"]} />
-      <SearchTrigger style={{ margin: 16 }} searchedTerm={searchedTerm} />
+    <ThemedView lightColor={Colors.light.primary} darkColor={Colors.dark.primary} style={styles.container}>
+      <CustomSwitch callback={() => {}} values={["doggo", "cato"]} style={styles.switch} />
+      <SearchTrigger searchedTerm={searchedTerm} style={styles.trigger} />
       <CustomDropdown 
       callback={() => {}}
+      style={styles.dropdown}
       data={[
           { label: "Option nnula", value: "0" },
           { label: "Option jeden", value: "1" },
@@ -29,7 +27,6 @@ export function SearchMenu() {
         valueField={"value"}
         onChange={(item) => {}}
       />
-
     </ThemedView>
   );
 }
@@ -40,4 +37,13 @@ const styles = StyleSheet.create({
     padding: 16,
     margin: 16
   },
+  dropdown: {
+    margin: 16,
+  },
+  switch: {
+    marginBottom: 16,
+  },
+  trigger: {
+    marginBottom: 16,
+  }
 });
