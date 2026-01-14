@@ -1,10 +1,13 @@
+import { ThemedText } from "@/components/themed-text";
 import { Colors } from "@/constants/theme";
 import { CustomSwitch } from "@/features/search/components/custom-switch";
 import { SearchMenu } from "@/features/search/components/search-menu";
+import { useState } from "react";
 import { useColorScheme, View } from "react-native";
 
 export default function Index() {
   const colorScheme = useColorScheme();
+  const [selectedIndex, setSelectedIndex] = useState(0);
 
   //TODO: fake clickable textfield
   //TODO: dropdown menu with varied string entries
@@ -23,10 +26,9 @@ export default function Index() {
       }}
     >
     
-      <CustomSwitch values={[
-        { label: "Option 1", value: "1" },
-        { label: "Option 2", value: "2" },
-      ]} 
+      <ThemedText>{["doggo", "cato"][selectedIndex]}</ThemedText>
+
+      <CustomSwitch callback={setSelectedIndex} values={["doggo", "cato"]} 
       backgroundColor={{ light: Colors.light.primary, dark: Colors.dark.primary }} />
 
       <SearchMenu />

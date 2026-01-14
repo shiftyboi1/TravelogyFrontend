@@ -4,10 +4,8 @@ import { useState } from "react";
 import { Pressable, StyleSheet, View } from "react-native";
 
 export type CustomSwitchProps = {
-  values: {
-    label: string;
-    value?: string;
-  }[]
+  callback: (selectedIndex: number) => void;
+  values: string[]
   backgroundColor?: {
     light: string;
     dark: string;
@@ -21,22 +19,23 @@ export type CustomSwitchProps = {
 // TODO: Pass in a callback for when selection changes
 
 export function CustomSwitch({
+  callback,
   values,
   backgroundColor,
   selectionColor,
 }: CustomSwitchProps) {
   const bgColor = useThemeColor({ light: backgroundColor?.light, dark: backgroundColor?.dark }, "background");
   const selectColor = useThemeColor({ light: selectionColor?.light, dark: selectionColor?.dark }, "secondary");
-  if (values.length === 0) { values = [{ label: "WHOOPS" }]; }
+  if (values.length === 0) { values = [ "WHOOPS"]; }
   const [selectedIndex, setSelectedIndex] = useState(0);
 
   return (
     <View style={[styles.container, { backgroundColor: bgColor }]}>
       {values.map((item, index) => (
         <View key={index} style={{ flexDirection: 'row', alignItems: 'center' }}>
-          <Pressable onPress={() => setSelectedIndex(index)} style={[styles.item, (index === selectedIndex && styles.selected)]}>
+          <Pressable onPress={() => { setSelectedIndex(index); callback(index); }} style={[styles.item, (index === selectedIndex && styles.selected)]}>
             <ThemedText>
-              {item.label}
+              {item}
             </ThemedText>
           </Pressable>
           {index < values.length - 1 && <ThemedText style={styles.divider}>|</ThemedText>}
