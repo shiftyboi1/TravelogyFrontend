@@ -7,7 +7,7 @@ import { Dropdown } from "react-native-element-dropdown";
 import { DropdownProps } from "react-native-element-dropdown/lib/typescript/components/Dropdown/model";
 
 export type CustomDropdownProps = DropdownProps<any> & {
-  callback: (selectedValue: any) => void;
+  callback: (selectedValue: number) => void;
 }
 
 export function CustomDropdown({

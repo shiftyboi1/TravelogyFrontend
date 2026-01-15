@@ -1,5 +1,6 @@
 import { ThemedView } from "@/components/themed-view";
 import { Colors } from "@/constants/theme";
+import { useState } from "react";
 import { StyleSheet } from "react-native";
 import { useSearchContext } from "../context/search-context";
 import { CustomDropdown } from "./custom-dropdown";
@@ -7,22 +8,54 @@ import { CustomSwitch } from "./custom-switch";
 import { SearchTrigger } from "./search-trigger";
 
 export function SearchMenu() {
+  const [type, setType] = useState<"city" | "country">("country");
   const { searchedTerm, setSearchedTerm } = useSearchContext();
-  
+  const [mode, setMode] = useState("");
+
+  const switchOpts = ["City", "Country"];
+  // TODO: Get valid options from API and cache them
+  let dropdownOpts = {
+    city: [
+      {label: "Commuter train", value: "commuter_train"},
+      {label: "Metro", value: "metro"},
+      {label: "Tram", value: "tram"},
+      {label: "Bus", value: "bus"},
+      
+    ],
+    country: [
+      {label: "High-Speed train", value: "high_speed_rail"},
+      {label: "Intercity train", value: "intercity_rail"},
+      {label: "Intercity Bus", value: "bus"},
+    ]
+  } ;
+
+  function onSwitchChange(index: number) {
+    if (index === 0) {
+      setType("city");
+    } else {
+      setType("country");
+    }
+  }
+
+  function onSearchChange(term: string) {
+    setSearchedTerm(term);
+  }
+
+  function onDropdownChange(selectedIndex: number) {
+    setMode(dropdownOpts[type][selectedIndex].value);
+  }
+
   // TODO: Search button
   // TODO: Style
 
   return (
     <ThemedView lightColor={Colors.light.primary} darkColor={Colors.dark.primary} style={styles.container}>
-      <CustomSwitch callback={() => {}} values={["doggo", "cato"]} style={styles.switch} />
+      <CustomSwitch callback={onSwitchChange} values={switchOpts} style={styles.switch} />
       <SearchTrigger searchedTerm={searchedTerm} style={styles.trigger} />
       <CustomDropdown 
-      callback={() => {}}
+      callback={onDropdownChange}
       style={styles.dropdown}
-      data={[
-          { label: "Option nnula", value: "0" },
-          { label: "Option jeden", value: "1" },
-        ]}
+      data={type === "city" ? dropdownOpts.city : dropdownOpts.country}
         labelField={"label"}
         valueField={"value"}
         onChange={(item) => {}}
