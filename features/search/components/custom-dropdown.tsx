@@ -16,6 +16,8 @@ export function CustomDropdown({
   const [selectedIndex, setSelectedIndex] = useState(0);
   const color = useThemeColor({}, "text");
 
+  const placeholderText = "How are you going?";
+
   return (
     <ThemedView style={styles.container}>
       <Dropdown
@@ -23,6 +25,7 @@ export function CustomDropdown({
         data={data}
         labelField={labelField}
         valueField={valueField}
+        placeholder={placeholderText}
         itemTextStyle={styles.itemText}
         selectedTextStyle={[styles.fieldText, { color }]}
         placeholderStyle={[styles.fieldText, styles.placeholderText, { color }]}
@@ -41,6 +44,7 @@ const styles = StyleSheet.create({
     borderRadius: 16,
     padding: 0,
     height: 60,
+    marginBottom: 16,
     justifyContent: "center",
   },
   dropdown: {

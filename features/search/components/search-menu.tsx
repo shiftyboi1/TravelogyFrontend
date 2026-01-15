@@ -1,10 +1,11 @@
 import { ThemedView } from "@/components/themed-view";
 import { Colors } from "@/constants/theme";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { StyleSheet } from "react-native";
 import { useSearchContext } from "../context/search-context";
 import { CustomDropdown } from "./custom-dropdown";
 import { CustomSwitch } from "./custom-switch";
+import { SearchButton } from "./search-button";
 import { SearchTrigger } from "./search-trigger";
 
 export function SearchMenu() {
@@ -37,16 +38,19 @@ export function SearchMenu() {
     }
   }
 
-  function onSearchChange(term: string) {
-    setSearchedTerm(term);
-  }
-
   function onDropdownChange(selectedIndex: number) {
     setMode(dropdownOpts[type][selectedIndex].value);
   }
 
+  useEffect(() => {
+    // Reset searched term when type changes
+    setSearchedTerm("");
+  }, [type]);
+
   // TODO: Search button
-  // TODO: Style
+  // TODO: Style dropdown
+  // TODO: Style search screen
+  // TODO: Fix text wrap
 
   return (
     <ThemedView lightColor={Colors.light.primary} darkColor={Colors.dark.primary} style={styles.container}>
@@ -60,6 +64,7 @@ export function SearchMenu() {
         valueField={"value"}
         onChange={(item) => {}}
       />
+      <SearchButton/>
     </ThemedView>
   );
 }
@@ -68,7 +73,12 @@ const styles = StyleSheet.create({
   container: {
     borderRadius: 16,
     padding: 16,
-    margin: 16
+    margin: 16,
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.25,
+    shadowRadius: 0,
+    elevation: 5,
   },
   dropdown: {
     margin: 16,
