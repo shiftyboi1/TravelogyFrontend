@@ -25,6 +25,11 @@ const styles = StyleSheet.create({
     justifyContent: "flex-end",
     height: 60,
     borderRadius: 50,
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.5,
+    shadowRadius: 0,
+    elevation: 5,
   },
   outerFlex: {
     flexDirection: "row",

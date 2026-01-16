@@ -36,7 +36,7 @@ export function CustomSwitch({
     <View style={[styles.container, { backgroundColor: bgColor }, style]}>
       {values.map((item, index) => (
         <View key={index} style={{ flexDirection: 'row', alignItems: 'center' }}>
-          <Pressable onPress={() => { setSelectedIndex(index); callback(index); }} style={[styles.item, (index === selectedIndex && styles.selected)]}>
+          <Pressable onPress={() => { setSelectedIndex(index); callback(index); }} style={[styles.item, (index === selectedIndex && {backgroundColor: selectColor})]}>
             <ThemedText lightColor={index === selectedIndex ? Colors.light.textSecondary : Colors.light.text} darkColor={Colors.dark.textSecondary} order={index === selectedIndex ? 'primary' : 'secondary'}>
               {item}
             </ThemedText>
@@ -60,9 +60,6 @@ const styles = StyleSheet.create({
     paddingVertical: 8,
     paddingHorizontal: 16,
     borderRadius: 16,
-  },
-  selected: {
-    backgroundColor: 'blue',
   },
   divider: {
     opacity: 0.5,

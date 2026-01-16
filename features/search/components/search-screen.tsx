@@ -1,17 +1,36 @@
 import { ThemedView } from "@/components/themed-view";
+import { FontSizes } from "@/constants/theme";
+import { useThemeColor } from "@/hooks/useThemeColor";
+import { useRouter } from "expo-router";
 import { StyleSheet, TextInput } from "react-native";
 import { useSearchContext } from "../context/search-context";
 
 export function SearchScreen() {
   const { searchedTerm, setSearchedTerm } = useSearchContext();
+  const bannerBackgroundColor = useThemeColor({}, 'primary');
+  const backgroundColor = useThemeColor({}, 'background');
+  const textColor = useThemeColor({}, 'text');
+  const placeholderColor = `${textColor}80`; // 50% opacity (80 in hex)
+  const router = useRouter();
+
+  function onSubmit() {
+    if (searchedTerm.trim().length === 0) return;
+    router.back();
+  }
 
   return (
-    <ThemedView style={styles.container}>
-      <ThemedView style={styles.banner}>
+    <ThemedView style={[styles.container, { backgroundColor: backgroundColor }]}>
+      <ThemedView style={[styles.banner, { backgroundColor: bannerBackgroundColor }]}>
         <TextInput 
           placeholder="Search Screen" 
+          placeholderTextColor={placeholderColor}
           value={searchedTerm}
           onChangeText={setSearchedTerm}
+          autoFocus={true}
+          returnKeyType="search"
+          onSubmitEditing={onSubmit}
+          style={[styles.searchInput, 
+            { fontSize: FontSizes.default, color: textColor, backgroundColor: backgroundColor }]}
         />
       </ThemedView>
     </ThemedView>
@@ -23,7 +42,13 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   banner: {
-    padding: 20,
+    width: '100%',
+    padding: 16
+  },
+  searchInput: {
+    height: 60,
+    paddingLeft: 16,
+    borderRadius: 16,
     alignItems: "center",
     justifyContent: "center",
   },

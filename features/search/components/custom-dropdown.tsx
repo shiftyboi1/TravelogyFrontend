@@ -15,6 +15,7 @@ export function CustomDropdown({
   labelField, valueField, onChange, ...props }: CustomDropdownProps) {
   const [selectedIndex, setSelectedIndex] = useState(0);
   const color = useThemeColor({}, "text");
+  const backgroundColor = useThemeColor({}, "background");
 
   const placeholderText = "How are you going?";
 
@@ -26,7 +27,8 @@ export function CustomDropdown({
         labelField={labelField}
         valueField={valueField}
         placeholder={placeholderText}
-        itemTextStyle={styles.itemText}
+        itemTextStyle={[styles.itemText, { color }]}
+        containerStyle={[styles.itemsContainer, { backgroundColor }]}
         selectedTextStyle={[styles.fieldText, { color }]}
         placeholderStyle={[styles.fieldText, styles.placeholderText, { color }]}
         onChange={(item) => {
@@ -49,6 +51,15 @@ const styles = StyleSheet.create({
   },
   dropdown: {
     height: 60,
+  },
+  itemsContainer: {
+    borderRadius: 16,
+    borderColor: "transparent",
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.5,
+    shadowRadius: 0,
+    elevation: 5,
   },
   itemText: {
     fontSize: FontSizes.default,
