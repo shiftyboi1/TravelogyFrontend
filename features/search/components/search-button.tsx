@@ -5,10 +5,10 @@ import { ThemedView } from "@/components/themed-view";
 import { Colors } from "@/constants/theme";
 import { Pressable, StyleSheet, View } from "react-native";
 
-export function SearchButton() {
+export function SearchButton(params: { onPress?: () => void }) {
   return (
     <View style={styles.outerFlex}>
-      <Pressable>
+      <Pressable onPress={params.onPress}>
         <ThemedView style={styles.container} lightColor={Colors.light.secondary} darkColor={Colors.dark.secondary} >
           <ThemedText lightColor={Colors.light.textSecondary} darkColor={Colors.dark.textSecondary} style={styles.text}>Search</ThemedText>
           <ThemedSvg lightColor={Colors.light.textSecondary} darkColor={Colors.dark.textSecondary} size={24} icon={searchIcon} style={styles.icon} />

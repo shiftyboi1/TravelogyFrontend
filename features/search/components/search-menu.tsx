@@ -46,10 +46,7 @@ export function SearchMenu() {
     // Reset searched term when type changes
     setSearchedTerm("");
   }, [type]);
-
-  // TODO: Search button
-  // TODO: Style dropdown
-  // TODO: Style search screen
+  
   // TODO: Fix text wrap
 
   return (
