@@ -22,7 +22,7 @@ export function SearchScreen() {
     <ThemedView style={[styles.container, { backgroundColor: backgroundColor }]}>
       <ThemedView style={[styles.banner, { backgroundColor: bannerBackgroundColor }]}>
         <TextInput 
-          placeholder="Search Screen" 
+          placeholder="Search for a location" 
           placeholderTextColor={placeholderColor}
           value={searchedTerm}
           onChangeText={setSearchedTerm}
