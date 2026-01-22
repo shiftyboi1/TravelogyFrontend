@@ -1,7 +1,8 @@
 import * as SecureStore from "expo-secure-store";
+import * as SplashScreen from "expo-splash-screen";
 import { createContext, useEffect, useState } from "react";
-import { USER_ID_STORE } from "../../constants/config";
 import { fetchNewUserId } from "../api/session";
+import { USER_ID_STORE } from "../constants/config";
 
 export type SessionContextType = {
   userId: string | null;
@@ -9,6 +10,8 @@ export type SessionContextType = {
 }
 
 export const SessionContext = createContext<SessionContextType | null>(null);
+
+SplashScreen.preventAutoHideAsync();
 
 export function SessionProvider({children}: {children: React.ReactNode}) {
   const [userId, setUserId] = useState<string | null>(null);
