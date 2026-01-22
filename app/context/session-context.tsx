@@ -28,11 +28,18 @@ export function SessionProvider({children}: {children: React.ReactNode}) {
         setUserId(idToBeSet);
         setIsReady(true);
       } catch (error) {
-        console.error("Failed to load user ID. If this is the first time you are running the app, make sure to be connected to the internet.");
+        console.error("Failed to load user ID.");
         setUserId(null);
+        setIsReady(true);
       }
     }
+
+    initializeSession();
   }, []);
+
+  if (!isReady) {
+    return null;
+  }
 
   return(
     <SessionContext.Provider value={{userId, setUserId}}>
