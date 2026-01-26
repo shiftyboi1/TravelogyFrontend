@@ -1,8 +1,7 @@
 import { Directory, File, Paths } from 'expo-file-system';
 
 export enum DataKey {
-  TAGS = 'tags',
-  TYPES = 'types',
+  TAGS = 'tags'
 }
 
 export enum StorageLocation {
@@ -18,15 +17,21 @@ export class SaveFileSystem {
     return new Directory(rootDir, location);
   }
 
-  static async ensureDirExists() {
+  static async ensureDirExists(location?: StorageLocation, shouldCreate?: boolean) {
     if (!rootDir.exists) {
       await rootDir.create();
+    }
+    if (location && shouldCreate) {
+      const dir = this.getDirectory(location);
+      if (!dir.exists) {
+        await dir.create();
+      }
     }
   }
 
   static async set<T>(location: StorageLocation, key: DataKey, data: T): Promise<void> {
     try {
-      await this.ensureDirExists();
+      await this.ensureDirExists(location, true);
       const file = new File(this.getDirectory(location), `${key}.json`);
       await file.write(JSON.stringify({ data }));
     } catch (error) {

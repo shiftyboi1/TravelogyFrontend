@@ -15,8 +15,7 @@ export async function client<T>(endpoint: string, options?: RequestInit): Promis
   });
 
   if (!response.ok) {
-    // throw new Error(`API Error: ${response.statusText}`);
-    console.log(`API Error: ${response.status} ${response.statusText}`);
+    throw new Error(`API Error: ${response.status} ${response.statusText} for ${BASE_URL}${endpoint}`);
   }
 
   // Handle empty responses

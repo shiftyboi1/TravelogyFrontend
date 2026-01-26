@@ -26,11 +26,11 @@ export function SessionProvider({children}: {children: React.ReactNode}) {
 
       await SplashScreen.hideAsync();
       try {
-        let idToBeSet = await SecureStore.getItemAsync(USER_ID_STORE);
+        let idToBeSet = await SecureStore.getItemAsync(USER_ID_STORE) as string | null;
         
-        if (!idToBeSet ) {
+        if (!idToBeSet || idToBeSet === null) {
           idToBeSet = await fetchNewUserId();
-          // if (idToBeSet) await SecureStore.setItemAsync(USER_ID_STORE, idToBeSet);
+          if (idToBeSet && idToBeSet !== null) await SecureStore.setItemAsync(USER_ID_STORE, String(idToBeSet));
         }
         if (idToBeSet === null) throw new Error("Failed to obtain user ID");
         setUserId(idToBeSet);

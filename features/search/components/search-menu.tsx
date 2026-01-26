@@ -5,12 +5,15 @@ import { useSessionContext } from "@/context/session-context";
 import { useEffect, useState } from "react";
 import { StyleSheet } from "react-native";
 import { useSearchContext } from "../context/search-context";
+import { useTagOptions } from "../hooks/use-tag-options";
 import { CustomDropdown } from "./custom-dropdown";
 import { CustomSwitch } from "./custom-switch";
 import { SearchButton } from "./search-button";
 import { SearchTrigger } from "./search-trigger";
 
 export function SearchMenu() {
+  console.debug("Rendering SearchMenu...");
+
   const [type, setType] = useState<"city" | "country">("country");
   const { searchedTerm, setSearchedTerm } = useSearchContext();
   const [mode, setMode] = useState("");
@@ -19,20 +22,12 @@ export function SearchMenu() {
 
   const switchOpts = ["City", "Country"];
   // TODO: Get valid options from API and cache them
-  let dropdownOpts = {
-    city: [
-      {label: "Commuter train", value: "commuter_train"},
-      {label: "Metro", value: "metro"},
-      {label: "Tram", value: "tram"},
-      {label: "Bus", value: "bus"},
-      
-    ],
-    country: [
-      {label: "High-Speed train", value: "high_speed_rail"},
-      {label: "Intercity train", value: "intercity_rail"},
-      {label: "Intercity Bus", value: "bus"},
-    ]
-  } ;
+  const { allOptions } = useTagOptions();
+
+  // const allOptions = {
+  //   city: [],
+  //   country: [],
+  // };
 
   function onSwitchChange(index: number) {
     if (index === 0) {
@@ -43,7 +38,7 @@ export function SearchMenu() {
   }
 
   function onDropdownChange(selectedIndex: number) {
-    setMode(dropdownOpts[type][selectedIndex].value);
+    setMode(allOptions[type][selectedIndex].internalText);
   }
 
   useEffect(() => {
@@ -60,9 +55,9 @@ export function SearchMenu() {
       <CustomDropdown 
       callback={onDropdownChange}
       style={styles.dropdown}
-      data={type === "city" ? dropdownOpts.city : dropdownOpts.country}
-        labelField={"label"}
-        valueField={"value"}
+      data={type === "city" ? allOptions.city : allOptions.country}
+        labelField={"displayText"}
+        valueField={"internalText"}
         onChange={(item) => {}}
       />
       {isLoading ? <ThemedText style={styles.loadingText} lightColor={Colors.light.textSecondary}>Loading...</ThemedText> : <SearchButton />}
