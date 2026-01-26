@@ -1,8 +1,10 @@
-// TODO: API call for valid endpoints
+import { client } from "./client";
+
+interface SessionResponse {
+  userId: string;
+}
+
 export async function fetchNewUserId(): Promise<string | null> {
-  // Placeholder implementation
-  console.log("fetching");
-  await new Promise(resolve => setTimeout(resolve, 1000)); // Simulate network delay
-  console.log("fetched ");
-  return null;
+  const response = await client<SessionResponse>("/users/new");
+  return response.userId || null;
 }
