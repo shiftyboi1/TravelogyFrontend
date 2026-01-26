@@ -4,8 +4,8 @@ import { Colors } from "@/constants/theme";
 import { useSessionContext } from "@/context/session-context";
 import { useEffect, useState } from "react";
 import { StyleSheet } from "react-native";
+import { useOptionsContext } from "../context/options-context";
 import { useSearchContext } from "../context/search-context";
-import { useTagOptions } from "../hooks/use-tag-options";
 import { CustomDropdown } from "./custom-dropdown";
 import { CustomSwitch } from "./custom-switch";
 import { SearchButton } from "./search-button";
@@ -20,7 +20,7 @@ export function SearchMenu() {
 
   const switchOpts = ["City", "Country"];
   // TODO: Get valid options from API and cache them
-  const { allOptions } = useTagOptions();
+  const { tagOptions } = useOptionsContext();
 
   function onSwitchChange(index: number) {
     if (index === 0) {
@@ -31,7 +31,7 @@ export function SearchMenu() {
   }
 
   function onDropdownChange(selectedIndex: number) {
-    setMode(allOptions[type][selectedIndex].internalText);
+    setMode(tagOptions[type][selectedIndex].internalText);
   }
 
   useEffect(() => {
@@ -48,7 +48,7 @@ export function SearchMenu() {
       <CustomDropdown 
       callback={onDropdownChange}
       style={styles.dropdown}
-      data={type === "city" ? allOptions.city : allOptions.country}
+      data={type === "city" ? tagOptions.city : tagOptions.country}
         labelField={"displayText"}
         valueField={"internalText"}
         onChange={(item) => {}}
