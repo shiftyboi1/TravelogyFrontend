@@ -1,5 +1,7 @@
+import { ThemedText } from "@/components/themed-text";
 import { ThemedView } from "@/components/themed-view";
 import { Colors } from "@/constants/theme";
+import { useSessionContext } from "@/context/session-context";
 import { useEffect, useState } from "react";
 import { StyleSheet } from "react-native";
 import { useSearchContext } from "../context/search-context";
@@ -12,6 +14,8 @@ export function SearchMenu() {
   const [type, setType] = useState<"city" | "country">("country");
   const { searchedTerm, setSearchedTerm } = useSearchContext();
   const [mode, setMode] = useState("");
+
+  const { isLoading } = useSessionContext();
 
   const switchOpts = ["City", "Country"];
   // TODO: Get valid options from API and cache them
@@ -61,7 +65,7 @@ export function SearchMenu() {
         valueField={"value"}
         onChange={(item) => {}}
       />
-      <SearchButton/>
+      {isLoading ? <ThemedText style={styles.loadingText} lightColor={Colors.light.textSecondary}>Loading...</ThemedText> : <SearchButton />}
     </ThemedView>
   );
 }
@@ -85,5 +89,9 @@ const styles = StyleSheet.create({
   },
   trigger: {
     marginBottom: 16,
-  }
+  },
+  loadingText: {
+    textAlign: "center",
+    margin: 14
+  },
 });

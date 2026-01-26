@@ -1,16 +1,16 @@
-import { ThemedText } from "@/components/themed-text";
 import * as SecureStore from "expo-secure-store";
 import * as SplashScreen from "expo-splash-screen";
-import { createContext, useEffect, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 import { fetchNewUserId } from "../api/session";
 import { USER_ID_STORE } from "../constants/config";
 
 export type SessionContextType = {
   userId: string | null;
   setUserId: (id: string | null) => void;
+  isLoading?: boolean;
 }
 
-export const SessionContext = createContext<SessionContextType | null>(null);
+const SessionContext = createContext<SessionContextType | null>(null);
 
 SplashScreen.preventAutoHideAsync();
 
@@ -23,15 +23,16 @@ export function SessionProvider({children}: {children: React.ReactNode}) {
 
   useEffect(() => {
     async function initializeSession() {
+
+      await SplashScreen.hideAsync();
       try {
         let idToBeSet = await SecureStore.getItemAsync(USER_ID_STORE);
         
-        if (idToBeSet) {
-          await SplashScreen.hideAsync();
-        } else {
+        if (!idToBeSet ) {
           idToBeSet = await fetchNewUserId();
-          if (idToBeSet) await SecureStore.setItemAsync(USER_ID_STORE, idToBeSet);
+          // if (idToBeSet) await SecureStore.setItemAsync(USER_ID_STORE, idToBeSet);
         }
+        if (idToBeSet === null) throw new Error("Failed to obtain user ID");
         setUserId(idToBeSet);
         setIsLoading(false);
       } catch (error) {
@@ -43,13 +44,17 @@ export function SessionProvider({children}: {children: React.ReactNode}) {
     initializeSession();
   }, []);
 
-  if (isLoading) {
-    return <ThemedText>Loading...</ThemedText>;
-  }
-
   return(
-    <SessionContext.Provider value={{userId, setUserId}}>
+    <SessionContext.Provider value={{userId, setUserId, isLoading}}>
       {children}
     </SessionContext.Provider>
   )
 }
+
+export function useSessionContext() {
+    const context = useContext(SessionContext);
+    if (!context) {
+      throw new Error("useSessionContext must be used within a SessionProvider");
+    }
+    return context;
+  }
