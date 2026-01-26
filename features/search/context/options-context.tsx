@@ -24,7 +24,6 @@ export function OptionsContextProvider({ children }: { children: ReactNode }) {
   const [tagOptions, setTagOptions] = useState<DropdownOptions>({ city: [], country: [] });
 
   useEffect(() => {
-    console.log("The evil is running.");
     let isMounted = true;
   
     const loadData = async () => {
