@@ -12,8 +12,6 @@ import { SearchButton } from "./search-button";
 import { SearchTrigger } from "./search-trigger";
 
 export function SearchMenu() {
-  console.debug("Rendering SearchMenu...");
-
   const [type, setType] = useState<"city" | "country">("country");
   const { searchedTerm, setSearchedTerm } = useSearchContext();
   const [mode, setMode] = useState("");
@@ -23,11 +21,6 @@ export function SearchMenu() {
   const switchOpts = ["City", "Country"];
   // TODO: Get valid options from API and cache them
   const { allOptions } = useTagOptions();
-
-  // const allOptions = {
-  //   city: [],
-  //   country: [],
-  // };
 
   function onSwitchChange(index: number) {
     if (index === 0) {
