@@ -1,10 +1,12 @@
-import { ThemedText } from "@/components/themed-text";
 import { ThemedView } from "@/components/themed-view";
 import { FontSizes } from "@/constants/theme";
+import { useSearchContext } from "@/features/search/context/search-context";
+import { useAutocompleteOptions } from "@/features/search/hooks/useAutocomplete";
 import { useThemeColor } from "@/hooks/useThemeColor";
 import { useRouter } from "expo-router";
+import { useEffect, useState } from "react";
 import { StyleSheet, TextInput } from "react-native";
-import { useSearchContext } from "../context/search-context";
+import { SearchOptionsList } from "./search-options-list";
 
 export function SearchScreen() {
   const { articleDelimiter, setArticleDelimiter } = useSearchContext();
@@ -14,10 +16,29 @@ export function SearchScreen() {
   const placeholderColor = `${textColor}80`; // 50% opacity (80 in hex)
   const router = useRouter();
 
-  function onSubmit() {
-    if (articleDelimiter.location.trim().length === 0) return;
+  const [input, setInput] = useState("");
+  const debouncedInput = useDebouncedValue(input, 200);
+
+  const options = useAutocompleteOptions(debouncedInput, articleDelimiter.type);
+
+  function useDebouncedValue<T>(value: T, delay: number): T {
+    const [debounced, setDebounced] = useState(value);
+
+    useEffect(() => {
+      const handler = setTimeout(() => setDebounced(value), delay);
+      return () => clearTimeout(handler);
+    }, [value, delay]);
+
+    return debounced;
+  }
+
+  function handleSelect(value: string) {
+    setArticleDelimiter({
+      ...articleDelimiter,
+      location: value,
+    });
     router.back();
-  };
+  }
 
   return (
     <ThemedView style={[styles.container, { backgroundColor: backgroundColor }]}>
@@ -25,16 +46,14 @@ export function SearchScreen() {
         <TextInput 
           placeholder="Search for a location" 
           placeholderTextColor={placeholderColor}
-          value={articleDelimiter.location}
-          onChangeText={(text) => setArticleDelimiter({ ...articleDelimiter, location: text })}
+          onChangeText={setInput}
           autoFocus={true}
           returnKeyType="search"
-          onSubmitEditing={onSubmit}
           style={[styles.searchInput, 
             { fontSize: FontSizes.default, color: textColor, backgroundColor: backgroundColor }]}
         />
       </ThemedView>
-      <ThemedText></ThemedText>
+      <SearchOptionsList options={options} written={input} onSelect={handleSelect} />
     </ThemedView>
   );
 }

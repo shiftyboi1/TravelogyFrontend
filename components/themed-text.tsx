@@ -28,7 +28,7 @@ export function ThemedText({
       type ==='titleBold' ? {fontSize:FontSizes.title, fontWeight:'bold'} : undefined,
       type ==='default' ? {fontSize:FontSizes.default} : undefined,
       type ==='defaultBold' ? {fontSize:FontSizes.default, fontWeight:'600'} : undefined,
-      type ==='subtitle' ? {fontSize:FontSizes.subtitle} : undefined,
+      type ==='subtitle' ? {fontSize:FontSizes.subtitle, opacity: 0.7} : undefined,
       type ==='link' ? {fontSize:FontSizes.default, color:'#0a7ea4'} : undefined,
       style,
     ]}

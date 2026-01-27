@@ -2,7 +2,6 @@ import { ThemedText } from "@/components/themed-text";
 import { ThemedView } from "@/components/themed-view";
 import { Colors } from "@/constants/theme";
 import { useSessionContext } from "@/context/session-context";
-import { useEffect, useState } from "react";
 import { StyleSheet } from "react-native";
 import { useOptionsContext } from "../context/options-context";
 import { useSearchContext } from "../context/search-context";
@@ -12,36 +11,37 @@ import { SearchButton } from "./search-button";
 import { SearchTrigger } from "./search-trigger";
 
 export function SearchMenu() {
-  const [type, setType] = useState<"city" | "country">("country");
   const { articleDelimiter, setArticleDelimiter } = useSearchContext();
-  const [mode, setMode] = useState("");
-
   const { isLoading } = useSessionContext();
-
   const { tagOptions } = useOptionsContext();
   const switchOpts = ["City", "Country"];
 
   function onSwitchChange(index: number) {
     if (index === 0) {
-      setType("city");
+      setArticleDelimiter({
+        ...articleDelimiter,
+        type: "city",
+        location: "",
+      });
     } else {
-      setType("country");
+      setArticleDelimiter({
+        ...articleDelimiter,
+        type: "country",
+        location: "",
+      });
     }
   }
 
   function onDropdownChange(selectedIndex: number) {
-    setMode(tagOptions[type][selectedIndex].internalText);
-  }
-
-  useEffect(() => {
-    // Reset searched term when type changes
     setArticleDelimiter({
       ...articleDelimiter,
-      location: "",
+      mode: tagOptions[articleDelimiter.type][selectedIndex].internalText,
     });
-  }, [type]);
+  }
   
   // TODO: Fix text wrap
+  // TODO: Style search screen
+  // TODO: Fix text wrap on search screen
 
   return (
     <ThemedView lightColor={Colors.light.primary} darkColor={Colors.dark.primary} style={styles.container}>
@@ -50,7 +50,7 @@ export function SearchMenu() {
       <CustomDropdown 
       callback={onDropdownChange}
       style={styles.dropdown}
-      data={type === "city" ? tagOptions.city : tagOptions.country}
+      data={articleDelimiter.type === "city" ? tagOptions.city : tagOptions.country}
         labelField={"displayText"}
         valueField={"internalText"}
         onChange={(item) => {}}
