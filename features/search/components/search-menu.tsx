@@ -13,7 +13,7 @@ import { SearchTrigger } from "./search-trigger";
 
 export function SearchMenu() {
   const [type, setType] = useState<"city" | "country">("country");
-  const { searchedTerm, setSearchedTerm } = useSearchContext();
+  const { articleDelimiter, setArticleDelimiter } = useSearchContext();
   const [mode, setMode] = useState("");
 
   const { isLoading } = useSessionContext();
@@ -35,7 +35,10 @@ export function SearchMenu() {
 
   useEffect(() => {
     // Reset searched term when type changes
-    setSearchedTerm("");
+    setArticleDelimiter({
+      ...articleDelimiter,
+      location: "",
+    });
   }, [type]);
   
   // TODO: Fix text wrap
@@ -43,7 +46,7 @@ export function SearchMenu() {
   return (
     <ThemedView lightColor={Colors.light.primary} darkColor={Colors.dark.primary} style={styles.container}>
       <CustomSwitch callback={onSwitchChange} values={switchOpts} style={styles.switch} />
-      <SearchTrigger searchedTerm={searchedTerm} style={styles.trigger} />
+      <SearchTrigger searchedTerm={articleDelimiter.location} style={styles.trigger} />
       <CustomDropdown 
       callback={onDropdownChange}
       style={styles.dropdown}

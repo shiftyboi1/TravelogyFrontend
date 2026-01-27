@@ -7,7 +7,7 @@ import { StyleSheet, TextInput } from "react-native";
 import { useSearchContext } from "../context/search-context";
 
 export function SearchScreen() {
-  const { searchedTerm, setSearchedTerm } = useSearchContext();
+  const { articleDelimiter, setArticleDelimiter } = useSearchContext();
   const bannerBackgroundColor = useThemeColor({}, 'primary');
   const backgroundColor = useThemeColor({}, 'background');
   const textColor = useThemeColor({}, 'text');
@@ -15,7 +15,7 @@ export function SearchScreen() {
   const router = useRouter();
 
   function onSubmit() {
-    if (searchedTerm.trim().length === 0) return;
+    if (articleDelimiter.location.trim().length === 0) return;
     router.back();
   };
 
@@ -25,8 +25,8 @@ export function SearchScreen() {
         <TextInput 
           placeholder="Search for a location" 
           placeholderTextColor={placeholderColor}
-          value={searchedTerm}
-          onChangeText={setSearchedTerm}
+          value={articleDelimiter.location}
+          onChangeText={(text) => setArticleDelimiter({ ...articleDelimiter, location: text })}
           autoFocus={true}
           returnKeyType="search"
           onSubmitEditing={onSubmit}

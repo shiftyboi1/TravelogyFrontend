@@ -8,20 +8,22 @@ export type ArticleDelimiter = {
 }
 
 type SearchContextType = {
-  searchedTerm: string;
-  setSearchedTerm: (term: string) => void;
-  searchedMode: "city" | "country";
-  setSearchedMode: (mode: "city" | "country") => void;
+  articleDelimiter: ArticleDelimiter;
+  setArticleDelimiter: (delimiter: ArticleDelimiter) => void;
 }
 
 const SearchContext = createContext<SearchContextType | undefined>(undefined);
 
 export function SearchContextProvider({ children }: { children: ReactNode }) {
-  const [searchedMode, setSearchedMode] = useState<"city" | "country">("city");
-  const [searchedTerm, setSearchedTerm] = useState<string>("");
+  const [articleDelimiter, setArticleDelimiter] = useState<ArticleDelimiter>({
+    location: "",
+    type: "city",
+    mode: "",
+    language: "en",
+  });
 
   return (
-    <SearchContext.Provider value={{ searchedTerm, setSearchedTerm, searchedMode, setSearchedMode }}>
+    <SearchContext.Provider value={{ articleDelimiter, setArticleDelimiter }}>
       {children}
     </SearchContext.Provider>
   );
