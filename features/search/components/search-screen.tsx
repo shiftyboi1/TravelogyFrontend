@@ -1,3 +1,4 @@
+import { ThemedText } from "@/components/themed-text";
 import { ThemedView } from "@/components/themed-view";
 import { FontSizes } from "@/constants/theme";
 import { useThemeColor } from "@/hooks/useThemeColor";
@@ -16,7 +17,7 @@ export function SearchScreen() {
   function onSubmit() {
     if (searchedTerm.trim().length === 0) return;
     router.back();
-  }
+  };
 
   return (
     <ThemedView style={[styles.container, { backgroundColor: backgroundColor }]}>
@@ -33,6 +34,7 @@ export function SearchScreen() {
             { fontSize: FontSizes.default, color: textColor, backgroundColor: backgroundColor }]}
         />
       </ThemedView>
+      <ThemedText></ThemedText>
     </ThemedView>
   );
 }

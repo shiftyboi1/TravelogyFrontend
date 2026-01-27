@@ -41,7 +41,8 @@ export function OptionsContextProvider({ children }: { children: ReactNode }) {
             await SaveFileSystem.set(StorageLocation.DATA, DataKey.TAGS, remoteData);
           }
         } catch (e) {
-          console.warn("Failed to load tag options", e);
+          // TODO: if init startup, do something idk yet
+
         }
       };
     loadData();

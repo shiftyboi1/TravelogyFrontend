@@ -18,9 +18,8 @@ export function SearchMenu() {
 
   const { isLoading } = useSessionContext();
 
-  const switchOpts = ["City", "Country"];
-  // TODO: Get valid options from API and cache them
   const { tagOptions } = useOptionsContext();
+  const switchOpts = ["City", "Country"];
 
   function onSwitchChange(index: number) {
     if (index === 0) {
