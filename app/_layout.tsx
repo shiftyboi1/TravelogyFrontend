@@ -25,6 +25,14 @@ export default function RootLayout() {
                 headerShadowVisible: false,
                 headerTitle: "Search",
                 }} />
+                <Stack.Screen name="article" options={{
+                presentation: "modal",
+                animation: "slide_from_bottom",
+                headerTransparent: true,
+                headerTintColor: Colors[colorScheme ?? "light"].textSecondary,
+                headerShadowVisible: false,
+                headerTitle: "",
+                }} />
             </Stack>
           </SearchContextProvider>
         </OptionsContextProvider>

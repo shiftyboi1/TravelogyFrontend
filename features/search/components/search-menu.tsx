@@ -2,6 +2,7 @@ import { ThemedText } from "@/components/themed-text";
 import { ThemedView } from "@/components/themed-view";
 import { Colors } from "@/constants/theme";
 import { useSessionContext } from "@/context/session-context";
+import { useRouter } from "expo-router";
 import { StyleSheet } from "react-native";
 import { useOptionsContext } from "../context/options-context";
 import { useSearchContext } from "../context/search-context";
@@ -39,6 +40,8 @@ export function SearchMenu() {
     });
   }
   
+  const router = useRouter();
+
   // TODO: Fix text wrap
   // TODO: Style search screen
   // TODO: Fix text wrap on search screen
@@ -55,7 +58,7 @@ export function SearchMenu() {
         valueField={"internalText"}
         onChange={(item) => {}}
       />
-      {isLoading ? <ThemedText style={styles.loadingText} lightColor={Colors.light.textSecondary}>Loading...</ThemedText> : <SearchButton />}
+      {isLoading ? <ThemedText style={styles.loadingText} lightColor={Colors.light.textSecondary}>Loading...</ThemedText> : <SearchButton onPress={() => router.push("/article")} />}
     </ThemedView>
   );
 }
@@ -66,7 +69,7 @@ const styles = StyleSheet.create({
     padding: 16,
     margin: 16,
     shadowColor: "#000",
-    shadowOffset: { width: 0, height: 2 },
+    shadowOffset: { width: 0, height: -2 },
     shadowOpacity: 0.25,
     shadowRadius: 0,
     elevation: 5,
