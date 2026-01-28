@@ -19,8 +19,6 @@ export type CountryAutocompleteResponse = {
   countries: string[];
 }
 
-
-
 export function useAutocompleteOptions(inputValue: string, type: "city" | "country"): AutocompleteOption[] {
   const [options, setOptions] = useState<AutocompleteOption[]>([]);
 
