@@ -3,29 +3,23 @@ import { useThemeColor } from '@/hooks/useThemeColor';
 import React, { useMemo } from 'react';
 import { EnrichedMarkdownText, MarkdownStyle } from 'react-native-enriched-markdown';
 
-export function MarkdownRenderer() {
+export type MarkdownRendererProps = {
+  markdown?: string;
+}
 
-  const markdownContent = `
-# Welcome to Markdown!
+export function MarkdownRenderer({ markdown }: MarkdownRendererProps) {
 
-This is a paragraph with **bold**, *italic*, and [links](https://reactnative.dev).
-
-- List item one
-- List item two
-  - Nested item
-
-\`\`\`javascript
-const greeting = 'Hello, World!';
-console.log(greeting);
-\`\`\`
-`;
+  const markdownContent = markdown || `# Loading...`;
   const textColor = useThemeColor({}, 'text');
+  const linkColor = useThemeColor({}, 'secondary');
 
   const markdownStyle = useMemo(() => ({
     paragraph: { fontSize: FontSizes.default, color: textColor },
     h1: { fontSize: FontSizes.header, fontWeight: 'bold', color: textColor },
+    list: { fontSize: FontSizes.default, color: textColor },
     strong: { fontWeight: 'bold', color: textColor },
     codeBlock: { backgroundColor: '#1E1E1E', color: '#D4D4D4' },
+    link: { color: linkColor, fontSize: FontSizes.default - 2, textDecorationLine: 'underline'},
   }), []);
 
   return (<EnrichedMarkdownText

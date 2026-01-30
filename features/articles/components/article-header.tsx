@@ -10,12 +10,12 @@ export type ArticleHeaderProps = {
 
 export function ArticleHeader({ locationText, style }: ArticleHeaderProps) {
   const [location, locationSecondary] = locationText.split(' ; ');
-
+  
   return (
     <ThemedView lightColor={Colors.light.primary} darkColor={Colors.dark.primary} style={[styles.container, style]}>
       <View style={styles.textContainer}>
-        <ThemedText type="title">{location}</ThemedText>
-        {locationSecondary && <ThemedText type="subtitle">{locationSecondary.toUpperCase()}</ThemedText>}
+        <ThemedText type="title" lightColor={Colors.light.textSecondary}>{location}</ThemedText>
+        {locationSecondary && <ThemedText type="subtitle" lightColor={Colors.light.textSecondary}>{locationSecondary.toUpperCase()}</ThemedText>}
       </View>
     </ThemedView>
   );
