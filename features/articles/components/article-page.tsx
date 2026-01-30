@@ -1,7 +1,7 @@
-import { ThemedText } from "@/components/themed-text";
 import { ThemedView } from "@/components/themed-view";
 import { ScrollView, StyleSheet } from "react-native";
 import { ArticleHeader } from "./article-header";
+import { MarkdownRenderer } from "./markdown-renderer";
 
 export function ArticlePage() {
   return (
@@ -9,7 +9,8 @@ export function ArticlePage() {
       <ArticleHeader locationText="Malmö ; Sweden" style={styles.header} />
       <ScrollView style={{ zIndex: 1, overflow: 'visible' }}>
         <ThemedView style={styles.content}>
-          <ThemedText style={{ fontSize: 24, fontWeight: 'bold'}}>PAWS</ThemedText>
+          {/* <ThemedText style={{ fontSize: 24, fontWeight: 'bold'}}>PAWS</ThemedText> */}
+          <MarkdownRenderer />
         </ThemedView>
       </ScrollView>
     </ThemedView>
