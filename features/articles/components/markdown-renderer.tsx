@@ -5,18 +5,20 @@ import { EnrichedMarkdownText, MarkdownStyle } from 'react-native-enriched-markd
 
 export type MarkdownRendererProps = {
   markdown?: string;
+  style?: object;
 }
 
-export function MarkdownRenderer({ markdown }: MarkdownRendererProps) {
+export function MarkdownRenderer({ markdown, style }: MarkdownRendererProps) {
 
   const markdownContent = markdown || `# Loading...`;
   const textColor = useThemeColor({}, 'text');
   const linkColor = useThemeColor({}, 'secondary');
 
   const markdownStyle = useMemo(() => ({
-    paragraph: { fontSize: FontSizes.default, color: textColor },
+    paragraph: { fontSize: FontSizes.default, color: textColor, marginBottom: 12, textAlign: 'justify' },
     h1: { fontSize: FontSizes.header, fontWeight: 'bold', color: textColor },
-    list: { fontSize: FontSizes.default, color: textColor },
+    h2: { fontSize: FontSizes.header, fontWeight: 'bold', color: textColor, marginBottom: 16 },
+    list: { fontSize: FontSizes.default, color: textColor, textAlign: 'justify', gapWidth: 16, lineHeight: FontSizes.default + 2 },
     strong: { fontWeight: 'bold', color: textColor },
     codeBlock: { backgroundColor: '#1E1E1E', color: '#D4D4D4' },
     link: { color: linkColor, fontSize: FontSizes.default - 2, textDecorationLine: 'underline'},
@@ -25,10 +27,7 @@ export function MarkdownRenderer({ markdown }: MarkdownRendererProps) {
   return (<EnrichedMarkdownText
     markdown={markdownContent}
     markdownStyle={markdownStyle as MarkdownStyle}
-    containerStyle={{ padding: 16 }}
-    isSelectable={true}  // Enables text selection/copy
-    onLinkPress={(event) => console.log(event.url)}  // Optional
+    containerStyle={style}
+    isSelectable={true}  
   />);
-
-
 }
