@@ -22,7 +22,7 @@ export function MarkdownRenderer({ markdown, style }: MarkdownRendererProps) {
     strong: { fontWeight: 'bold', color: textColor },
     codeBlock: { backgroundColor: '#1E1E1E', color: '#D4D4D4' },
     link: { color: linkColor, fontSize: FontSizes.default - 2, textDecorationLine: 'underline'},
-  }), []);
+  }), [textColor]);
 
   return (<EnrichedMarkdownText
     markdown={markdownContent}

@@ -13,7 +13,7 @@ const testDelimiter : ArticleDelimiter= {
 
 const testContent = {
   operatingHours: "12:00 - 21:30",
-  relativePrice: "MID" as 'LOW' | 'MID' | 'HIGH',
+  relativePrice: "LOW" as 'LOW' | 'MID' | 'HIGH',
 };
 
 const markdown: string = `
