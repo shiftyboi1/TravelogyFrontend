@@ -23,8 +23,8 @@ export function ThemedText({
     <Text
     style = {[
       {color},
-      type ==='header' ? {fontSize:FontSizes.header, fontWeight:'bold'} : undefined,
-      type ==='title' ? {fontSize:FontSizes.title} : undefined,
+      type ==='header' ? {fontSize:FontSizes.header} : undefined,
+      type ==='title' ? {fontSize:FontSizes.title, fontWeight:'bold'} : undefined,
       type ==='titleBold' ? {fontSize:FontSizes.title, fontWeight:'bold'} : undefined,
       type ==='default' ? {fontSize:FontSizes.default} : undefined,
       type ==='defaultBold' ? {fontSize:FontSizes.default, fontWeight:'600'} : undefined,

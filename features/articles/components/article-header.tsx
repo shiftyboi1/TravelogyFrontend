@@ -14,7 +14,7 @@ export function ArticleHeader({ locationText, style }: ArticleHeaderProps) {
   return (
     <ThemedView lightColor={Colors.light.primary} darkColor={Colors.dark.primary} style={[styles.container, style]}>
       <View style={styles.textContainer}>
-        <ThemedText type="header">{location}</ThemedText>
+        <ThemedText type="title">{location}</ThemedText>
         {locationSecondary && <ThemedText type="subtitle">{locationSecondary.toUpperCase()}</ThemedText>}
       </View>
     </ThemedView>

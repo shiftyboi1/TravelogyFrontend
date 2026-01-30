@@ -16,7 +16,7 @@ export function SearchEntry({ index, onSelect, location, locationSecondary }: Se
   return (
     <ThemedView style={[styles.container, { borderColor: useThemeColor({}, 'text') + "40"}]}>
       <TouchableOpacity onPress={() => onSelect(index)} style={[styles.entry]}>
-        {<ThemedText type="title" style={styles.unwritten}>{location}</ThemedText>}
+        {<ThemedText type="header" style={styles.unwritten}>{location}</ThemedText>}
         {locationSecondary && 
           <ThemedText type="subtitle" style={{ textAlignVertical: 'center' }}>{locationSecondary}</ThemedText>
         }

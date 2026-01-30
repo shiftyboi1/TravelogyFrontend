@@ -23,7 +23,7 @@ console.log(greeting);
 
   const markdownStyle = useMemo(() => ({
     paragraph: { fontSize: FontSizes.default, color: textColor },
-    h1: { fontSize: FontSizes.title, fontWeight: 'bold', color: textColor },
+    h1: { fontSize: FontSizes.header, fontWeight: 'bold', color: textColor },
     strong: { fontWeight: 'bold', color: textColor },
     codeBlock: { backgroundColor: '#1E1E1E', color: '#D4D4D4' },
   }), []);

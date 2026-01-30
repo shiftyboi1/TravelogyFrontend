@@ -18,7 +18,7 @@ export default function Index() {
       }}
     >
 
-      <ThemedText style={{textAlign: "center"}} type="header">Travelogy</ThemedText>
+      <ThemedText style={{textAlign: "center"}} type="title">Travelogy</ThemedText>
       <SearchMenu />
     </View>
   );
