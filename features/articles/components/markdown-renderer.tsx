@@ -1,5 +1,7 @@
+import { FontSizes } from '@/constants/theme';
+import { useThemeColor } from '@/hooks/useThemeColor';
 import React, { useMemo } from 'react';
-import { EnrichedMarkdownText } from 'react-native-enriched-markdown';
+import { EnrichedMarkdownText, MarkdownStyle } from 'react-native-enriched-markdown';
 
 export function MarkdownRenderer() {
 
@@ -17,19 +19,22 @@ const greeting = 'Hello, World!';
 console.log(greeting);
 \`\`\`
 `;
+  const textColor = useThemeColor({}, 'text');
 
   const markdownStyle = useMemo(() => ({
-    paragraph: { fontSize: 16, lineHeight: 24 },
-    h1: { fontSize: 32, fontWeight: 'bold' },
-    strong: { fontWeight: 'bold' },
+    paragraph: { fontSize: FontSizes.default, color: textColor },
+    h1: { fontSize: FontSizes.title, fontWeight: 'bold', color: textColor },
+    strong: { fontWeight: 'bold', color: textColor },
     codeBlock: { backgroundColor: '#1E1E1E', color: '#D4D4D4' },
   }), []);
 
   return (<EnrichedMarkdownText
     markdown={markdownContent}
+    markdownStyle={markdownStyle as MarkdownStyle}
     containerStyle={{ padding: 16 }}
     isSelectable={true}  // Enables text selection/copy
     onLinkPress={(event) => console.log(event.url)}  // Optional
   />);
+
 
 }

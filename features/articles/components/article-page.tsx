@@ -9,7 +9,6 @@ export function ArticlePage() {
       <ArticleHeader locationText="Malmö ; Sweden" style={styles.header} />
       <ScrollView style={{ zIndex: 1, overflow: 'visible' }}>
         <ThemedView style={styles.content}>
-          {/* <ThemedText style={{ fontSize: 24, fontWeight: 'bold'}}>PAWS</ThemedText> */}
           <MarkdownRenderer />
         </ThemedView>
       </ScrollView>
@@ -30,10 +29,8 @@ const styles = StyleSheet.create({
     right: 0,
   },
   content: {
-    elevation: 20,
     marginTop: 200,
     borderRadius: 16,
-    height: 2000,
     justifyContent: 'center',
     alignItems: 'center',
     overflow: 'visible',
