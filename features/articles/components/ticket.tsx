@@ -89,7 +89,7 @@ export function Ticket({ delimiter, content, style }: TicketProps) {
         </View>
 
         <View style={styles.rightStub}>
-           { content.relativePrice && <ThemedText type='subtitle'>Price:</ThemedText> }
+           { content.relativePrice && <ThemedText type='subtitle' style={{ color: textColor }}>Price:</ThemedText> }
            { content.relativePrice && <ThemedText type='subtitle' style={[styles.time, { color: priceColor, borderColor: priceColor, backgroundColor: `${priceColor}20` }]}>{content.relativePrice}</ThemedText> }
         </View>
 
