@@ -8,7 +8,7 @@ import { Pressable, StyleSheet, View } from "react-native";
 export function SearchButton(params: { onPress?: () => void }) {
   return (
     <View style={styles.outerFlex}>
-      <Pressable onPress={params.onPress}>
+      <Pressable onPress={params.onPress} style={({ pressed }) => pressed ? styles.pressed : {}}>
         <ThemedView style={styles.container} lightColor={Colors.light.secondary} darkColor={Colors.dark.secondary} >
           <ThemedText lightColor={Colors.light.textSecondary} darkColor={Colors.dark.textSecondary} style={styles.text}>Search</ThemedText>
           <ThemedSvg lightColor={Colors.light.textSecondary} darkColor={Colors.dark.textSecondary} size={24} icon={searchIcon} style={styles.icon} />
@@ -40,5 +40,8 @@ const styles = StyleSheet.create({
   },
   text: {
     marginLeft: 16
-  }
+  },
+  pressed: {
+    transform: [{ scale: 0.9 }],
+  },
 });

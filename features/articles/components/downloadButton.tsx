@@ -18,7 +18,7 @@ export function DownloadButton({ onPress, available, style }: DownloadButtonProp
       darkColor={Colors.dark.secondary}
       style={[styles.container, style, available ? {} : { backgroundColor: useThemeColor({}, 'unavailable') }]}
     >
-      <Pressable onPress={onPress}>
+      <Pressable onPress={onPress} disabled={!available} style={({ pressed }) => pressed ? styles.pressed : {}}>
         <ThemedSvg icon={DownloadIcon} size={32} />
       </Pressable>
     </ThemedView>
@@ -37,5 +37,8 @@ const styles = StyleSheet.create({
     borderRadius: 16,
     justifyContent: 'center',
     alignItems: 'center',
+  },
+  pressed: {
+    transform: [{ scale: 0.8 }],
   },
 });

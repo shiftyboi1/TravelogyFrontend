@@ -4,6 +4,7 @@ import { ThemedView } from "@/components/themed-view";
 import { Colors } from "@/constants/theme";
 import { useThemeColor } from "@/hooks/useThemeColor";
 import { ThumbsDownIcon, ThumbsUpIcon } from "lucide-react-native";
+import { useState } from "react";
 import { Pressable, StyleSheet, View } from "react-native";
 import ProgressBar from "react-native-progress/Bar";
 
@@ -11,26 +12,45 @@ export type RatingsProps = {
   positive: number;
   negative: number;
   available?: boolean;
+  userRating?: 'positive' | 'negative';
   style?: object;
 };
 
-export function Ratings({ positive = 0, negative = 0, available = false, style }: RatingsProps) {
+export function Ratings({ positive = 0, negative = 0, available = false, userRating, style }: RatingsProps) {
   const positiveColor = positive > 0 ? "#4CAF50" : useThemeColor({}, 'unavailable');
   const negativeColor = negative > 0 ? "#F44336" : useThemeColor({}, 'unavailable');
 
   const positiveButtonColor = available ? "#4CAF50" : useThemeColor({}, 'unavailable');
   const negativeButtonColor = available ? "#F44336" : useThemeColor({}, 'unavailable');
 
+  const [positiveRatings, setPositiveRatings] = useState(positive);
+  const [negativeRatings, setNegativeRatings] = useState(negative);
+  const [currentUserRating, setCurrentUserRating] = useState(userRating);
+
+  // TODO: Send to API
+
+  function handlePress(rating: 'positive' | 'negative') {
+    if (!available || currentUserRating === rating ) return;
+    if (rating === 'positive') {
+      setPositiveRatings(positiveRatings + 1);
+      setNegativeRatings(Math.max(0, negativeRatings - 1));
+    } else {
+      setNegativeRatings(negativeRatings + 1);
+      setPositiveRatings(Math.max(0, positiveRatings - 1));
+    }    
+    setCurrentUserRating(rating);
+  }
+
   return (
     <ThemedView lightColor={Colors.light.backgroundSecondary} darkColor={Colors.dark.backgroundSecondary} style={[styles.container, style]}>
       <View style={styles.leftRow}>
         <View style={styles.topRow}>
-          <ThemedText style={{ color: positiveColor }}>{positive}</ThemedText>
+          <ThemedText style={{ color: positiveColor }}>{positiveRatings}</ThemedText>
           <ThemedText style={{ opacity: 0.5 }}>/</ThemedText>
-          <ThemedText style={{ color: negativeColor }}>{negative}</ThemedText>
+          <ThemedText style={{ color: negativeColor }}>{negativeRatings}</ThemedText>
         </View>
         <ProgressBar 
-          progress={positive + negative === 0 ? 0 : positive / (positive + negative)} 
+          progress={positiveRatings + negativeRatings === 0 ? 0 : positiveRatings / (positiveRatings + negativeRatings)} 
           width={null} 
           color={positiveColor} 
           unfilledColor={negativeColor}
@@ -40,13 +60,21 @@ export function Ratings({ positive = 0, negative = 0, available = false, style }
         />
       </View>
       <View style={styles.ratingButtonsView}>
-        <Pressable>
-          <ThemedView style={[styles.ratingButton, { backgroundColor: positiveButtonColor }]}>
+        <Pressable disabled={!available} style={({ pressed }) => pressed ? styles.pressed : {}} onPress={() => handlePress('positive')}>
+          <ThemedView style={[styles.ratingButton, {
+            backgroundColor: positiveButtonColor,
+            opacity: currentUserRating === 'negative' ? 0.7 : 1,
+            transform: [{ scale: currentUserRating === 'negative' ? 0.95 : 1 }],
+            }]}>
             <ThemedSvg icon={ThumbsUpIcon} />
           </ThemedView>
         </Pressable>
-        <Pressable>
-          <ThemedView style={[styles.ratingButton, { backgroundColor: negativeButtonColor }]}>
+        <Pressable disabled={!available} style={({ pressed }) => pressed ? styles.pressed : {}} onPress={() => handlePress('negative')}>
+          <ThemedView style={[styles.ratingButton, {
+            backgroundColor: negativeButtonColor,
+            opacity: currentUserRating === 'positive' ? 0.7 : 1,
+            transform: [{ scale: currentUserRating === 'positive' ? 0.95 : 1 }],
+            }]}>
             <ThemedSvg icon={ThumbsDownIcon} />
           </ThemedView>
         </Pressable>
@@ -91,5 +119,8 @@ const styles = StyleSheet.create({
     borderRadius: 16,
     justifyContent: 'center',
     alignItems: 'center',
+  },
+  pressed: {
+    transform: [{ scale: 0.9 }],
   },
 });

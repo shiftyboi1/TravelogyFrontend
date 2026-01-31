@@ -1,5 +1,6 @@
 import { ThemedText } from '@/components/themed-text';
 import { Colors, PriceColors } from '@/constants/theme';
+import { useOptionsContext } from '@/features/search/context/options-context';
 import { useThemeColor } from '@/hooks/useThemeColor';
 import React, { useState } from 'react';
 import { LayoutChangeEvent, StyleSheet, View } from 'react-native';
@@ -69,7 +70,17 @@ export function Ticket({ delimiter, content, style }: TicketProps) {
   const textColor = useThemeColor({dark: Colors.light.text }, 'text');
   const priceColor = content.relativePrice ? PriceColors[content.relativePrice] : textColor;
   const [location, locationSecondary] = delimiter.location.split(' ; ');
-  const tagText = delimiter.tag.charAt(0).toUpperCase() + delimiter.tag.slice(1);
+
+  const { tagOptions } = useOptionsContext();
+
+  // TODO: Test this
+
+  let tagText = "";
+  if (delimiter.type === "city") {
+    tagText = tagOptions.city.find(opt => opt.internalText === delimiter.mode)?.displayText || delimiter.mode;
+  } else {
+    tagText = tagOptions.country.find(opt => opt.internalText === delimiter.mode)?.displayText || delimiter.mode;
+  }
 
   return (
     <View style={[styles.container, style]} onLayout={onWrapperLayout}>

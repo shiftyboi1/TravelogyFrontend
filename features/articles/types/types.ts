@@ -1,6 +1,6 @@
 export type ArticleDelimiter = {
   location: string;
-  type: string;
-  tag: string;
-  //language: string;
+  type: "city" | "country";
+  mode: string;
+  language: string;
 }

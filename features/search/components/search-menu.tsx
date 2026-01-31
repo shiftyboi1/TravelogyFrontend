@@ -3,6 +3,7 @@ import { ThemedView } from "@/components/themed-view";
 import { Colors } from "@/constants/theme";
 import { useSessionContext } from "@/context/session-context";
 import { useRouter } from "expo-router";
+import { useEffect } from "react";
 import { StyleSheet } from "react-native";
 import { useOptionsContext } from "../context/options-context";
 import { useSearchContext } from "../context/search-context";
@@ -42,8 +43,16 @@ export function SearchMenu() {
   
   const router = useRouter();
 
-  // TODO: Fix text wrap
-  // TODO: Style search screen
+  useEffect(() => {
+    // Test delimiter
+    setArticleDelimiter({
+      location: "Oslo ; Norwayyyyyyyyyyyyyyyyy",
+      type: "city",
+      mode: "bus",
+      language: "en"
+    });
+  }, []);
+
   // TODO: Fix text wrap on search screen
 
   return (

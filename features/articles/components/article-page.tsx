@@ -1,17 +1,11 @@
 import { ThemedView } from "@/components/themed-view";
+import { useSearchContext } from "@/features/search/context/search-context";
 import { ScrollView, StyleSheet, View } from "react-native";
-import { ArticleDelimiter } from "../types/types";
 import { ArticleHeader } from "./article-header";
 import { DownloadButton } from "./downloadButton";
 import { MarkdownRenderer } from "./markdown-renderer";
 import { Ratings } from "./ratings";
 import { Ticket } from "./ticket";
-
-const testDelimiter : ArticleDelimiter= {
-  location: "Malmö ; Sweden",
-  tag: "bus",
-  type: "city"
-};
 
 const testContent = {
   operatingHours: "12:00 - 21:30",
@@ -49,17 +43,20 @@ Bus travel is included in the city-wide public transport ticket for Malmö (loca
 `;
 
 export function ArticlePage() {
+
+  const { articleDelimiter } = useSearchContext();
+
   return (
     <ThemedView style={styles.container}>
-      <ArticleHeader locationText={testDelimiter.location} style={styles.header} />
+      <ArticleHeader locationText={articleDelimiter.location} style={styles.header} />
       <ScrollView style={styles.scrollView}>
         <ThemedView style={styles.content}>
-          <Ticket delimiter={testDelimiter} content={testContent} style={styles.ticket} />
+          <Ticket delimiter={articleDelimiter} content={testContent} style={styles.ticket} />
           <MarkdownRenderer style={styles.markdown} markdown={markdown} />
         </ThemedView>
       </ScrollView>
       <View style={styles.lowBar}>
-        <Ratings positive={4} negative={1} available={true} style={styles.ratings} />
+        <Ratings positive={4} negative={1} available={true} userRating="negative" style={styles.ratings} />
         <DownloadButton available={true} onPress={() => {}} />
       </View>
     </ThemedView>
