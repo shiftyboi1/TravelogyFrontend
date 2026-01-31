@@ -5,7 +5,7 @@ import { useThemeColor } from '@/hooks/useThemeColor';
 import React, { useState } from 'react';
 import { LayoutChangeEvent, StyleSheet, View } from 'react-native';
 import Svg, { Line, Path } from 'react-native-svg';
-import { ArticleDelimiter } from '../types/types';
+import { ArticleData, ArticleDelimiter } from '../types/types';
 
 const TicketBackground = ({ width, height, cutoutX }: { width: number, height: number, cutoutX: number }) => {
   const color = useThemeColor({ light: Colors.light.backgroundSecondary, dark: Colors.light.background }, 'background');
@@ -48,10 +48,7 @@ const TicketBackground = ({ width, height, cutoutX }: { width: number, height: n
 
 export type TicketProps = {
   delimiter: ArticleDelimiter;
-  content: {
-    operatingHours?: string;
-    relativePrice?: 'LOW' | 'MID' | 'HIGH';
-  }
+  content: ArticleData
   style?: object;
 };
 

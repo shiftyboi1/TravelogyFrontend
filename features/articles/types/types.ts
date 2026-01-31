@@ -21,3 +21,9 @@ export type Article = {
   location: string;
   text: string;
 };
+
+export type ArticleData = {
+  exists: boolean;
+  operatingHours?: string;
+  relativePrice?: 'LOW' | 'MID' | 'HIGH';
+};
