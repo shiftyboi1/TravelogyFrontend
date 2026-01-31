@@ -69,6 +69,7 @@ export function Ticket({ delimiter, content, style }: TicketProps) {
   const textColor = useThemeColor({dark: Colors.light.text }, 'text');
   const priceColor = content.relativePrice ? PriceColors[content.relativePrice] : textColor;
   const [location, locationSecondary] = delimiter.location.split(' ; ');
+  const tagText = delimiter.tag.charAt(0).toUpperCase() + delimiter.tag.slice(1);
 
   return (
     <View style={[styles.container, style]} onLayout={onWrapperLayout}>
@@ -83,9 +84,9 @@ export function Ticket({ delimiter, content, style }: TicketProps) {
       <View style={styles.contentRow}>
 
         <View onLayout={onLeftLayout} style={styles.leftSection}>
-          <ThemedText type="header" style={[styles.title, { color: textColor }]}>{location}</ThemedText>
-          {locationSecondary && <ThemedText type="subtitle" style={[styles.subtitle, { color: textColor }]}>{locationSecondary}</ThemedText>}
-          <ThemedText type="subtitle" style={[styles.subtitle, { color: textColor }]}>{delimiter.tag.toUpperCase()} {content.operatingHours && (`(${content.operatingHours})`)}</ThemedText>
+          <ThemedText type="header" style={[styles.title, { color: textColor }]}>{tagText}</ThemedText>
+          <ThemedText type="subtitle" style={[styles.subtitle, { color: textColor }]}>{delimiter.location}</ThemedText>
+          <ThemedText type="subtitle" style={[styles.subtitle, { color: textColor }]}>{content.operatingHours && (`(${content.operatingHours})`)}</ThemedText>
         </View>
 
         <View style={styles.rightStub}>
