@@ -47,7 +47,7 @@ export function useAutocompleteOptions(inputValue: string, type: "city" | "count
       if (isMounted) setOptions(fetchedOptions);
     }
 
-    if (inputValue) fetchOptions();
+    if (inputValue && inputValue.length > 2) fetchOptions();
     else setOptions([]);
 
     return () => { isMounted = false; }; // Cleanup

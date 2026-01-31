@@ -46,7 +46,7 @@ export function SearchMenu() {
   useEffect(() => {
     // Test delimiter
     setArticleDelimiter({
-      location: "Oslo ; Norwayyyyyyyyyyyyyyyyy",
+      location: "Oslo ; Norway",
       type: "city",
       mode: "bus",
       language: "en"
