@@ -12,35 +12,35 @@ const testContent = {
   relativePrice: "LOW" as 'LOW' | 'MID' | 'HIGH',
 };
 
-const markdown: string = `
-## TIMETABLES
+// const markdown: string = `
+// ## TIMETABLES
 
-* Digital displays and route maps at major stops and terminals.
-* Official transit mobile app with route maps, stop lists, and real-time departures.
-* Journey planner integrated into the regional public transport system.
+// * Digital displays and route maps at major stops and terminals.
+// * Official transit mobile app with route maps, stop lists, and real-time departures.
+// * Journey planner integrated into the regional public transport system.
 
-## PURCHASE
+// ## PURCHASE
 
-Bus travel is included in the city-wide public transport ticket for Malmö (local zone). City-wide tickets can be purchased digitally or at authorized sales points before boarding.
+// Bus travel is included in the city-wide public transport ticket for Malmö (local zone). City-wide tickets can be purchased digitally or at authorized sales points before boarding.
 
-* App/Online: Official Skånetrafiken mobile app.
-* Machines: Ticket machines at major stations and selected stops.
+// * App/Online: Official Skånetrafiken mobile app.
+// * Machines: Ticket machines at major stations and selected stops.
 
-## DISCOUNTS
+// ## DISCOUNTS
 
-* Student: Valid student status verified with an approved student card (for example, ISIC or Swedish student card).
-* Senior: Age-based eligibility verified with photo ID.
-* Child/Youth: Age-based eligibility verified by age declaration or ID when requested.
+// * Student: Valid student status verified with an approved student card (for example, ISIC or Swedish student card).
+// * Senior: Age-based eligibility verified with photo ID.
+// * Child/Youth: Age-based eligibility verified by age declaration or ID when requested.
 
-## HINTS
+// ## HINTS
 
-* Tickets must be purchased and activated before boarding; onboard sales are not available.
-* Cash is not accepted on buses.
-* Tickets are validated digitally in the app or automatically upon purchase from machines.
-* Night services may operate on selected routes outside standard hours, especially on weekends.
-* Zone validity matters when traveling beyond Malmö city limits.
+// * Tickets must be purchased and activated before boarding; onboard sales are not available.
+// * Cash is not accepted on buses.
+// * Tickets are validated digitally in the app or automatically upon purchase from machines.
+// * Night services may operate on selected routes outside standard hours, especially on weekends.
+// * Zone validity matters when traveling beyond Malmö city limits.
 
-`;
+// `;
 
 export function ArticlePage() {
 
@@ -52,7 +52,7 @@ export function ArticlePage() {
       <ScrollView style={styles.scrollView}>
         <ThemedView style={styles.content}>
           <Ticket delimiter={articleDelimiter} content={testContent} style={styles.ticket} />
-          <MarkdownRenderer style={styles.markdown} markdown={markdown} />
+          <MarkdownRenderer style={styles.markdown} markdown={""} />
         </ThemedView>
       </ScrollView>
       <View style={styles.lowBar}>
