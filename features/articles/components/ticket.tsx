@@ -7,7 +7,7 @@ import Svg, { Line, Path } from 'react-native-svg';
 import { ArticleDelimiter } from '../types/types';
 
 const TicketBackground = ({ width, height, cutoutX }: { width: number, height: number, cutoutX: number }) => {
-  const color = useThemeColor({ light: '#FFFFFF', dark: Colors.light.background }, 'background');
+  const color = useThemeColor({ light: Colors.light.backgroundSecondary, dark: Colors.light.background }, 'background');
 
   const radius = 16;
   const cutoutRadius = 20;

@@ -1,8 +1,10 @@
 import { ThemedView } from "@/components/themed-view";
-import { ScrollView, StyleSheet } from "react-native";
+import { ScrollView, StyleSheet, View } from "react-native";
 import { ArticleDelimiter } from "../types/types";
 import { ArticleHeader } from "./article-header";
+import { DownloadButton } from "./downloadButton";
 import { MarkdownRenderer } from "./markdown-renderer";
+import { Ratings } from "./ratings";
 import { Ticket } from "./ticket";
 
 const testDelimiter : ArticleDelimiter= {
@@ -56,6 +58,10 @@ export function ArticlePage() {
           <MarkdownRenderer style={styles.markdown} markdown={markdown} />
         </ThemedView>
       </ScrollView>
+      <View style={styles.lowBar}>
+        <Ratings positive={4} negative={1} available={true} style={styles.ratings} />
+        <DownloadButton available={true} onPress={() => {}} />
+      </View>
     </ThemedView>
   );
 }
@@ -90,5 +96,22 @@ const styles = StyleSheet.create({
   markdown: {
     marginBottom: 240,
     paddingHorizontal: 24,
+  },
+  lowBar: {
+    gap: 16,
+    flexDirection: 'row',
+    zIndex: 2,
+    position: 'absolute',
+    bottom: 0,
+    left: 0,
+    right: 0,
+    margin: 16,
+    marginBottom: 64,
+    alignSelf: 'center',
+    backgroundColor: 'transparent',
+  },
+  ratings: {
+    height: '100%',
+    flex: 1,
   },
 });
