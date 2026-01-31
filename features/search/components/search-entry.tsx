@@ -16,9 +16,9 @@ export function SearchEntry({ index, onSelect, location, locationSecondary }: Se
   return (
     <ThemedView style={[styles.container, { borderColor: useThemeColor({}, 'text') + "40"}]}>
       <TouchableOpacity onPress={() => onSelect(index)} style={[styles.entry]}>
-        {<ThemedText type="header" style={styles.unwritten}>{location}</ThemedText>}
+        {<ThemedText numberOfLines={1} ellipsizeMode="tail" type="header" style={locationSecondary ? styles.leftTextCity : styles.leftTextCountry}>{location}</ThemedText>}
         {locationSecondary && 
-          <ThemedText type="subtitle" style={{ textAlignVertical: 'center' }}>{locationSecondary}</ThemedText>
+          <ThemedText type="subtitle" numberOfLines={1} ellipsizeMode="tail" style={styles.rightText}>{locationSecondary}</ThemedText>
         }
       </TouchableOpacity>
     </ThemedView>
@@ -37,11 +37,16 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     flexDirection: 'row',
   },
-  written: {
-    fontWeight: 'bold',
+  leftTextCity: {
     textAlignVertical: 'center',
+    maxWidth: '60%',
   },
-  unwritten: {
+  leftTextCountry: {
     textAlignVertical: 'center',
+    maxWidth: '80%',
   },
+  rightText: {
+    textAlignVertical: 'center',
+    maxWidth: '40%',
+  }
 });

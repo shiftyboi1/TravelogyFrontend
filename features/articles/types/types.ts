@@ -4,3 +4,20 @@ export type ArticleDelimiter = {
   mode: string;
   language: string;
 }
+
+export type ArticleDelimiterDto = {
+  location: string;
+  language: string;
+  internalType: "city" | "country";
+  internalTag: string;
+};
+
+export type Article = {
+  tag: string;
+  articleId: number;
+  version: number;
+  language: string;
+  type: "city" | "country";
+  location: string;
+  text: string;
+};

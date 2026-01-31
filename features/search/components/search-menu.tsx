@@ -3,7 +3,6 @@ import { ThemedView } from "@/components/themed-view";
 import { Colors } from "@/constants/theme";
 import { useSessionContext } from "@/context/session-context";
 import { useRouter } from "expo-router";
-import { useEffect } from "react";
 import { StyleSheet } from "react-native";
 import { useOptionsContext } from "../context/options-context";
 import { useSearchContext } from "../context/search-context";
@@ -24,12 +23,14 @@ export function SearchMenu() {
         ...articleDelimiter,
         type: "city",
         location: "",
+        mode: "",
       });
     } else {
       setArticleDelimiter({
         ...articleDelimiter,
         type: "country",
         location: "",
+        mode: "",
       });
     }
   }
@@ -40,20 +41,13 @@ export function SearchMenu() {
       mode: tagOptions[articleDelimiter.type][selectedIndex].internalText,
     });
   }
-  
+
   const router = useRouter();
 
-  useEffect(() => {
-    // Test delimiter
-    setArticleDelimiter({
-      location: "Oslo ; Norway",
-      type: "city",
-      mode: "bus",
-      language: "en"
-    });
-  }, []);
-
-  // TODO: Fix text wrap on search screen
+  function onPressSearch() {
+    if (articleDelimiter.location === "" || articleDelimiter.mode === "") return;
+    router.push("/article");
+  }
 
   return (
     <ThemedView lightColor={Colors.light.primary} darkColor={Colors.dark.primary} style={styles.container}>
@@ -67,7 +61,7 @@ export function SearchMenu() {
         valueField={"internalText"}
         onChange={(item) => {}}
       />
-      {isLoading ? <ThemedText style={styles.loadingText} lightColor={Colors.light.textSecondary}>Loading...</ThemedText> : <SearchButton onPress={() => router.push("/article")} />}
+      {isLoading ? <ThemedText style={styles.loadingText} lightColor={Colors.light.textSecondary}>Loading...</ThemedText> : <SearchButton onPress={onPressSearch} />}
     </ThemedView>
   );
 }

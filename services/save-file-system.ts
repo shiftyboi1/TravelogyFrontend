@@ -21,15 +21,23 @@ export class SaveFileSystem {
     if (!rootDir.exists) {
       await rootDir.create();
     }
+
+    if (location) {
+      const dir = this.getDirectory(location);
+      if (!dir.exists) {
+        await dir.create();
+      }
+    }
   }
 
   static async set<T>(location: StorageLocation, key: DataKey, data: T): Promise<void> {
     try {
       await this.ensureDirExists(location);
       const file = new File(this.getDirectory(location), `${key}.json`);
+      if (!file.exists) await file.create();
       await file.write(JSON.stringify({ data }));
     } catch (error) {
-      console.error(`[SaveFile] Write failed for ${key}:`, error);
+      console.error(`[SaveFile] Write failed for ${location}/${key}:`, error);
     }
   }
 

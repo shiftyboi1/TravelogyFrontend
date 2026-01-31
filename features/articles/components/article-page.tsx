@@ -1,6 +1,7 @@
 import { ThemedView } from "@/components/themed-view";
 import { useSearchContext } from "@/features/search/context/search-context";
 import { ScrollView, StyleSheet, View } from "react-native";
+import { useArticle } from "../hooks/useArticle";
 import { ArticleHeader } from "./article-header";
 import { DownloadButton } from "./downloadButton";
 import { MarkdownRenderer } from "./markdown-renderer";
@@ -45,6 +46,7 @@ const testContent = {
 export function ArticlePage() {
 
   const { articleDelimiter } = useSearchContext();
+  const { article } = useArticle(articleDelimiter);
 
   return (
     <ThemedView style={styles.container}>
@@ -52,7 +54,7 @@ export function ArticlePage() {
       <ScrollView style={styles.scrollView}>
         <ThemedView style={styles.content}>
           <Ticket delimiter={articleDelimiter} content={testContent} style={styles.ticket} />
-          <MarkdownRenderer style={styles.markdown} markdown={""} />
+          <MarkdownRenderer style={styles.markdown} markdown={article?.text} />
         </ThemedView>
       </ScrollView>
       <View style={styles.lowBar}>

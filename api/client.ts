@@ -1,8 +1,8 @@
 const BASE_URL = process.env.EXPO_PUBLIC_API_URL || "http://127.0.0.1/8080";
 
-export async function client<T>(endpoint: string, options?: RequestInit & { json?: string }): Promise<T> {
+export async function client<T>(endpoint: string, options?: RequestInit & { body?: string }): Promise<T> {
   const defaults = {
-    method: options?.json ? "POST" : "GET",
+    method: options?.body ? "POST" : "GET",
     headers: {
       "Content-Type": "application/json",
       // "Authorization": `Bearer ${token}` // Handle tokens centrally here

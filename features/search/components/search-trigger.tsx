@@ -8,9 +8,13 @@ import { Pressable, StyleSheet, type StyleProp, type ViewStyle } from "react-nat
 export function SearchTrigger({ searchedTerm, style }: { searchedTerm?: string; style?: StyleProp<ViewStyle> }) {
   const router = useRouter();
   const placeholderText = "Where are you going?";
-
+  
+  function handlePress() {
+    router.push("/search");
+  }
+  
   return (
-    <Pressable onPress={() => router.push("/search")} style={style}>
+    <Pressable onPress={handlePress} style={style}>
       <ThemedView type="textInputContainer">
         <ThemedSvg icon={SearchIcon} size={24} style={styles.icon} />
         <ThemedText numberOfLines={1} ellipsizeMode="tail" type="default" style={[{width: '78%'}, searchedTerm ? undefined : styles.placeholder]}>{searchedTerm || placeholderText}</ThemedText>

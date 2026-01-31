@@ -19,7 +19,7 @@ export function CustomDropdown({
   const highlightColor = useThemeColor({}, "secondary");
   const subtleHighlightColor = `${highlightColor}20`; // 12.5% opacity
 
-  const placeholderText = data ? "No internet connection." : "How are you going?";
+  const placeholderText = (data && data.length > 0) ? "How are you going?" : "No internet connection.";
 
   return (
     <ThemedView style={styles.container}>
