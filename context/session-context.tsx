@@ -5,8 +5,8 @@ import { fetchNewUserId } from "../api/session";
 import { USER_ID_STORE } from "../constants/config";
 
 export type SessionContextType = {
-  userId: string | null;
-  setUserId: (id: string | null) => void;
+  userId: number | null;
+  setUserId: (id: number | null) => void;
   isLoading?: boolean;
 }
 
@@ -15,7 +15,7 @@ const SessionContext = createContext<SessionContextType | null>(null);
 SplashScreen.preventAutoHideAsync();
 
 export function SessionProvider({children}: {children: React.ReactNode}) {
-  const [userId, setUserId] = useState<string | null>(null);
+  const [userId, setUserId] = useState<number | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -26,7 +26,7 @@ export function SessionProvider({children}: {children: React.ReactNode}) {
 
       await SplashScreen.hideAsync();
       try {
-        let idToBeSet = await SecureStore.getItemAsync(USER_ID_STORE) as string | null;
+        let idToBeSet = await SecureStore.getItemAsync(USER_ID_STORE) as number | null;
         
         if (!idToBeSet || idToBeSet === null) {
           idToBeSet = await fetchNewUserId();

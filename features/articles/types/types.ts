@@ -12,6 +12,12 @@ export type ArticleDelimiterDto = {
   internalTag: string;
 };
 
+export type RatingPostDto = {
+  userId: number;
+  articleId: number;
+  positive: boolean;
+};
+
 export type Article = {
   tag: string;
   articleId: number;

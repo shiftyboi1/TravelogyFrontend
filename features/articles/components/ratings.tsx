@@ -17,11 +17,10 @@ export type RatingsProps = {
 };
 
 export function Ratings({ positive = 0, negative = 0, available = false, userRating, style }: RatingsProps) {
-  const positiveColor = positive > 0 ? "#4CAF50" : useThemeColor({}, 'unavailable');
-  const negativeColor = negative > 0 ? "#F44336" : useThemeColor({}, 'unavailable');
+  const unavailableColor = useThemeColor({}, 'unavailable');
 
-  const positiveButtonColor = available ? "#4CAF50" : useThemeColor({}, 'unavailable');
-  const negativeButtonColor = available ? "#F44336" : useThemeColor({}, 'unavailable');
+  const positiveColor = "#4CAF50"
+  const negativeColor = "#F44336"
 
   const [positiveRatings, setPositiveRatings] = useState(positive);
   const [negativeRatings, setNegativeRatings] = useState(negative);
@@ -52,8 +51,8 @@ export function Ratings({ positive = 0, negative = 0, available = false, userRat
         <ProgressBar 
           progress={positiveRatings + negativeRatings === 0 ? 0 : positiveRatings / (positiveRatings + negativeRatings)} 
           width={null} 
-          color={positiveColor} 
-          unfilledColor={negativeColor}
+          color={positiveRatings + negativeRatings === 0 ? unavailableColor : positiveColor} 
+          unfilledColor={positiveRatings + negativeRatings === 0 ? unavailableColor : negativeColor}
           borderWidth={0}
           height={10}
           style={{ marginTop: 8, borderRadius: 5 }}
@@ -62,7 +61,7 @@ export function Ratings({ positive = 0, negative = 0, available = false, userRat
       <View style={styles.ratingButtonsView}>
         <Pressable disabled={!available} style={({ pressed }) => pressed ? styles.pressed : {}} onPress={() => handlePress('positive')}>
           <ThemedView style={[styles.ratingButton, {
-            backgroundColor: positiveButtonColor,
+            backgroundColor: available ? positiveColor : unavailableColor,
             opacity: currentUserRating === 'negative' ? 0.7 : 1,
             transform: [{ scale: currentUserRating === 'negative' ? 0.95 : 1 }],
             }]}>
@@ -71,7 +70,7 @@ export function Ratings({ positive = 0, negative = 0, available = false, userRat
         </Pressable>
         <Pressable disabled={!available} style={({ pressed }) => pressed ? styles.pressed : {}} onPress={() => handlePress('negative')}>
           <ThemedView style={[styles.ratingButton, {
-            backgroundColor: negativeButtonColor,
+            backgroundColor: available ? negativeColor : unavailableColor,
             opacity: currentUserRating === 'positive' ? 0.7 : 1,
             transform: [{ scale: currentUserRating === 'positive' ? 0.95 : 1 }],
             }]}>

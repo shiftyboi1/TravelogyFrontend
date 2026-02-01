@@ -15,7 +15,6 @@ export function ArticlePage() {
   const { article } = useArticle(articleDelimiter);
 
   const { data, markdown } = parseContent(article?.text || "");
-
   return (
     <ThemedView style={styles.container}>
       <ArticleHeader locationText={articleDelimiter.location} style={styles.header} />
@@ -26,8 +25,8 @@ export function ArticlePage() {
         </ThemedView>
       </ScrollView>
       <View style={styles.lowBar}>
-        <Ratings positive={4} negative={1} available={true} userRating="negative" style={styles.ratings} />
-        <DownloadButton available={true} onPress={() => {}} />
+        <Ratings positive={0} negative={0} available={article?.articleId !== undefined} style={styles.ratings} />
+        <DownloadButton available={article !== undefined} onPress={() => {}} />
       </View>
     </ThemedView>
   );
