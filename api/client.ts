@@ -16,8 +16,11 @@ export async function client<T>(endpoint: string, options?: RequestInit & { body
   });
 
   if (!response.ok) {
+    console.log('API response not ok:', options?.body ? JSON.parse(options.body) : null);
     throw new Error(`API Error: ${response.status} ${response.statusText} for ${BASE_URL}${endpoint}`);
   }
+
+  console.log('API response ok:', options?.body ? JSON.parse(options.body) : null);
 
   // Handle empty responses
   if (response.status === 204) return {} as T;

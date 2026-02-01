@@ -42,11 +42,11 @@ export function ArticlePage() {
       });
       setFormattedUserRating('negative');
     }
-    postArticleRating(userId, article!.articleId!, newRating === 'positive' ? true : false);
+    postArticleRating(article!.articleId!, userId, newRating === 'positive' ? true : false);
   };
 
   useEffect(() => {
-    if (userRating === null) {
+    if (userRating === null || userRating === undefined) {
       setFormattedUserRating(undefined);
       return;
     }
