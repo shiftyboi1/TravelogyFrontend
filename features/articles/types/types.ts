@@ -12,12 +12,6 @@ export type ArticleDelimiterDto = {
   internalTag: string;
 };
 
-export type RatingPostDto = {
-  userId: number;
-  articleId: number;
-  positive: boolean;
-};
-
 export type Article = {
   tag: string;
   articleId: number;
@@ -32,4 +26,22 @@ export type ArticleData = {
   exists: boolean;
   operatingHours?: string;
   relativePrice?: 'LOW' | 'MID' | 'HIGH';
+};
+
+export type RatingPostDto = {
+  userId: number;
+  articleId: number;
+  positive: boolean;
+};
+
+export type RatingPostResponseDto = {
+  ratingId: number;
+  article: Article;
+  user: { userId: number };
+  isPositive: boolean;
+};
+
+export type RatingsOfResponseDto = {
+  positiveRatings: number;
+  negativeRatings: number;
 };

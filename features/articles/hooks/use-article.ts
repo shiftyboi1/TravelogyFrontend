@@ -5,6 +5,7 @@ import { Article, ArticleDelimiter } from "../types/types";
 
 export function useArticle(articleDelimiter?: ArticleDelimiter, articleId?: number) {
   const [article, setArticle] = useState<Article | null>(null);
+  const [articleStatus, setArticleStatus] = useState<'loading' | 'error' | 'loaded'>('loading');
 
   useEffect(() => {
     let isMounted = true;
@@ -12,10 +13,17 @@ export function useArticle(articleDelimiter?: ArticleDelimiter, articleId?: numb
     async function fetchAndSetArticle() {
       if (!articleDelimiter) return;
       try {
+        if (isMounted) setArticleStatus('loading');
         const fetchedArticle = await fetchArticle(articleDelimiter);
-        if (isMounted) setArticle(fetchedArticle);
+        if (isMounted) {
+          setArticle(fetchedArticle);
+          setArticleStatus('loaded');
+        }
       } catch (error) {
-        console.error("Error fetching article:", error);
+        if (isMounted) {
+          setArticle(null);
+          setArticleStatus('error');
+        }
       }
     }
     
@@ -28,5 +36,5 @@ export function useArticle(articleDelimiter?: ArticleDelimiter, articleId?: numb
     return () => { isMounted = false; };
   }, [articleDelimiter, articleId]);
 
-  return {article};
+  return {article, articleStatus};
 }
