@@ -3,6 +3,7 @@ import { ThemedView } from "@/components/themed-view";
 import { Colors } from "@/constants/theme";
 import { useSessionContext } from "@/context/session-context";
 import { useRouter } from "expo-router";
+import { useCallback } from "react";
 import { StyleSheet } from "react-native";
 import { useOptionsContext } from "../context/options-context";
 import { useSearchContext } from "../context/search-context";
@@ -17,7 +18,7 @@ export function SearchMenu() {
   const { tagOptions } = useOptionsContext();
   const switchOpts = ["City", "Country"];
 
-  function onSwitchChange(index: number) {
+  const onSwitchChange = useCallback((index: number) => {
     if (index === 0) {
       setArticleDelimiter({
         ...articleDelimiter,
@@ -33,21 +34,21 @@ export function SearchMenu() {
         mode: "",
       });
     }
-  }
+  }, [articleDelimiter, setArticleDelimiter]);
 
-  function onDropdownChange(selectedIndex: number) {
+  const onDropdownChange = useCallback((selectedIndex: number) => {
     setArticleDelimiter({
       ...articleDelimiter,
       mode: tagOptions[articleDelimiter.type][selectedIndex].internalText,
     });
-  }
+  }, [articleDelimiter, setArticleDelimiter, tagOptions]);
 
   const router = useRouter();
 
-  function onPressSearch() {
+  const onPressSearch = useCallback(() => {
     if (articleDelimiter.location === "" || articleDelimiter.mode === "") return;
     router.push("/article");
-  }
+  }, [articleDelimiter, router]);
 
   return (
     <ThemedView lightColor={Colors.light.primary} darkColor={Colors.dark.primary} style={styles.container}>

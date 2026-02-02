@@ -1,7 +1,7 @@
 import { ThemedView } from "@/components/themed-view";
 import { useSessionContext } from "@/context/session-context";
 import { useSearchContext } from "@/features/search/context/search-context";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { ScrollView, StyleSheet, View } from "react-native";
 import { postArticleRating } from "../api/ratings";
 import { useArticle } from "../hooks/use-article";
@@ -26,7 +26,7 @@ export function ArticlePage() {
 
   const ERROR_TEXT = "Connection to server unavailable.";
 
-  const handleRatingChange = async (currentRating: 'positive' | 'negative' | undefined, newRating: 'positive' | 'negative') => {
+  const handleRatingChange = useCallback( async (currentRating: 'positive' | 'negative' | undefined, newRating: 'positive' | 'negative') => {
     if (currentRating === newRating) return;
     if (!userId || !article?.articleId) return;
     if (newRating === 'positive') {
@@ -43,7 +43,7 @@ export function ArticlePage() {
       setFormattedUserRating('negative');
     }
     postArticleRating(article!.articleId!, userId, newRating === 'positive' ? true : false);
-  };
+  }, [article, userId, ratings]);
 
   useEffect(() => {
     if (userRating === null || userRating === undefined) {

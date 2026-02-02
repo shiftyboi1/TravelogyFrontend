@@ -22,6 +22,12 @@ export type Article = {
   text: string;
 };
 
+export type ArticlePreview = {
+  location: string;
+  tag: string;
+  articleId: number;
+}
+
 export type ArticleData = {
   exists: boolean;
   operatingHours?: string;
