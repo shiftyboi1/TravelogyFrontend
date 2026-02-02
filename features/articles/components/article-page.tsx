@@ -29,11 +29,9 @@ export function ArticlePage() {
   const [downloadable, setDownloadable] = useState<boolean>(false);
 
   useEffect(() => {
-    console.log("ArticlePage: articleStatus =", articleStatus, ", articleLocal =", articleLocal, ", article =", article);
     if (article === undefined || articleLocal || articleStatus !== 'loaded') {
       setDownloadable(false);
     } else {
-      console.log("ArticlePage: Article is downloadable.");
       setDownloadable(true);
     }
   }, [articleLocal, article, articleStatus]);
