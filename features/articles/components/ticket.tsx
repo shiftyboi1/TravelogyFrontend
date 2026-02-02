@@ -5,7 +5,7 @@ import { useThemeColor } from '@/hooks/useThemeColor';
 import React, { useState } from 'react';
 import { LayoutChangeEvent, StyleSheet, View } from 'react-native';
 import Svg, { Line, Path } from 'react-native-svg';
-import { ArticleData, ArticleDelimiter } from '../types/types';
+import { ArticleData } from '../types/types';
 
 const TicketBackground = ({ width, height, cutoutX }: { width: number, height: number, cutoutX: number }) => {
   const color = useThemeColor({ light: Colors.light.backgroundSecondary, dark: Colors.light.background }, 'background');
@@ -47,12 +47,15 @@ const TicketBackground = ({ width, height, cutoutX }: { width: number, height: n
 };
 
 export type TicketProps = {
-  delimiter: ArticleDelimiter;
+  locationString: string;
+  mode: string;
+  type: string;
   content: ArticleData
   style?: object;
 };
 
-export function Ticket({ delimiter, content, style }: TicketProps) {
+export function Ticket({ locationString, mode, type, content, style }: TicketProps) {
+  if (!locationString) { locationString = ""; }
   const [size, setSize] = useState({ width: 0, height: 0 });
   const [leftWidth, setLeftWidth] = useState(0);
 
@@ -66,17 +69,17 @@ export function Ticket({ delimiter, content, style }: TicketProps) {
 
   const textColor = useThemeColor({dark: Colors.light.text }, 'text');
   const priceColor = content.relativePrice ? PriceColors[content.relativePrice] : textColor;
-  const [location, locationSecondary] = delimiter.location.split(' ; ');
+  const [location, locationSecondary] = locationString.split(' ; ');
 
   const { tagOptions } = useOptionsContext();
 
   // TODO: Test this
 
   let tagText = "";
-  if (delimiter.type === "city") {
-    tagText = tagOptions.city.find(opt => opt.internalText === delimiter.mode)?.displayText || delimiter.mode;
+  if (type === "city") {
+    tagText = tagOptions.city.find(opt => opt.internalText === mode)?.displayText || mode;
   } else {
-    tagText = tagOptions.country.find(opt => opt.internalText === delimiter.mode)?.displayText || delimiter.mode;
+    tagText = tagOptions.country.find(opt => opt.internalText === mode)?.displayText || mode;
   }
 
   return (
@@ -93,7 +96,7 @@ export function Ticket({ delimiter, content, style }: TicketProps) {
 
         <View onLayout={onLeftLayout} style={styles.leftSection}>
           <ThemedText type="header" style={[styles.title, { color: textColor }]}>{tagText}</ThemedText>
-          <ThemedText type="subtitle" style={[styles.subtitle, { color: textColor }]}>{delimiter.location}</ThemedText>
+          <ThemedText type="subtitle" style={[styles.subtitle, { color: textColor }]}>{location}</ThemedText>
           <ThemedText type="subtitle" style={[styles.subtitle, { color: textColor }]}>{content.operatingHours && (`(${content.operatingHours})`)}</ThemedText>
         </View>
 

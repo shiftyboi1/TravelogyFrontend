@@ -3,6 +3,7 @@ import { ThemedText } from "@/components/themed-text";
 import { ThemedView } from "@/components/themed-view";
 import { Colors } from "@/constants/theme";
 import { Trash2 } from "lucide-react-native";
+import { useCallback } from "react";
 import { Pressable, StyleSheet } from "react-native";
 
 export type ListEntryProps = {
@@ -15,15 +16,24 @@ export type ListEntryProps = {
 };
 
 export function ListEntry({ location, articleId, tag, onDelete, onPress, style }: ListEntryProps) {
+  
+  const handlePress = useCallback(() => {
+    onPress(articleId);
+  }, [onPress, articleId]);
+
+  const handleDelete = useCallback(() => {
+    onDelete(articleId);
+  }, [onDelete, articleId]);
+
   return (
     <ThemedView lightColor={Colors.light.secondary} darkColor={Colors.dark.secondary} style={[styles.container, style]}>
-      <Pressable style={styles.leftColumn} onPress={() => onPress(articleId)}>
+      <Pressable style={styles.leftColumn} onPress={handlePress}>
         <ThemedView lightColor={Colors.light.primary} darkColor={Colors.dark.primary} style={styles.leftColumnContent}>
           <ThemedText type="defaultBold">{location}</ThemedText>
           <ThemedText type="subtitle">{tag}</ThemedText>
         </ThemedView>
       </Pressable>
-      <Pressable style={({pressed}) => [styles.deleteButton, pressed ? styles.pressed : {}]} onPress={() => onDelete(articleId)}>
+      <Pressable style={({pressed}) => [styles.deleteButton, pressed ? styles.pressed : {}]} onPress={handleDelete}>
         <ThemedSvg icon={Trash2} size={32} />
       </Pressable>
     </ThemedView>

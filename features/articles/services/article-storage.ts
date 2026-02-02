@@ -1,5 +1,5 @@
 import { db } from "@/services/database";
-import { Article, ArticlePreview } from "../types/types";
+import { Article, ArticleDelimiter, ArticlePreview } from "../types/types";
 
 export const getSavedArticlesList = async () : Promise<Array<ArticlePreview>> => {
   const articles = await db.getAllAsync<ArticlePreview>(
@@ -11,6 +11,22 @@ export const getSavedArticlesList = async () : Promise<Array<ArticlePreview>> =>
 export const deleteArticleFromStorage = async (articleId: number) => {
   await db.runAsync(
     'DELETE FROM articles WHERE articleId = ?', [articleId]);
+};
+
+export const getSavedArticleByDelimiter = async (delimiter: ArticleDelimiter) : Promise<Article | null> => {
+  const article = await db.getFirstAsync<Article>(
+    'SELECT * FROM articles WHERE location = ? AND tag = ? AND type = ? AND language = ?',
+    [delimiter.location, delimiter.mode, delimiter.type, delimiter.language]
+  );
+  return article || null;
+}
+
+export const getSavedArticleById = async (articleId: number) : Promise<Article | null> => {
+  const article = await db.getFirstAsync<Article>(
+    'SELECT * FROM articles WHERE articleId = ?',
+    [articleId]
+  );
+  return article || null;
 };
 
 export const saveArticleToDevice = async (article: Article) => {

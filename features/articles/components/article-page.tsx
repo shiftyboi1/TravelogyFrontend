@@ -1,6 +1,7 @@
 import { ThemedView } from "@/components/themed-view";
 import { useSessionContext } from "@/context/session-context";
 import { useSearchContext } from "@/features/search/context/search-context";
+import { useLocalSearchParams } from "expo-router";
 import { useCallback, useEffect, useState } from "react";
 import { Alert, ScrollView, StyleSheet, View } from "react-native";
 import { postArticleRating } from "../api/ratings";
@@ -17,13 +18,25 @@ import { Ticket } from "./ticket";
 export function ArticlePage() {
 
   const { articleDelimiter } = useSearchContext();
+  const { id } = useLocalSearchParams();
   const { userId } = useSessionContext();
-  const { article, articleStatus } = useArticle(articleDelimiter);
+  const { article, articleStatus, articleLocal } = useArticle(articleDelimiter, id ? Number(id) : null);
   const { ratings, setRatings, userRating } = useRatings(article?.articleId);
 
   const { data, markdown } = parseContent(article?.text || "");
 
   const [formattedUserRating, setFormattedUserRating] = useState<"positive" | "negative" | undefined>(undefined);
+  const [downloadable, setDownloadable] = useState<boolean>(false);
+
+  useEffect(() => {
+    console.log("ArticlePage: articleStatus =", articleStatus, ", articleLocal =", articleLocal, ", article =", article);
+    if (article === undefined || articleLocal || articleStatus !== 'loaded') {
+      setDownloadable(false);
+    } else {
+      console.log("ArticlePage: Article is downloadable.");
+      setDownloadable(true);
+    }
+  }, [articleLocal, article, articleStatus]);
 
   const ERROR_TEXT = "Connection to server unavailable.";
 
@@ -60,6 +73,7 @@ export function ArticlePage() {
     if (!article) return;
     try {
       saveArticleToDevice(article);
+      setDownloadable(false);
     } catch (error) {
       Alert.alert("Error", "Failed to save article to device.");
     }
@@ -67,10 +81,15 @@ export function ArticlePage() {
 
   return (
     <ThemedView style={styles.container}>
-      <ArticleHeader locationText={articleDelimiter.location} style={styles.header} />
+      <ArticleHeader locationText={article === null ? articleDelimiter.location : article.location} style={styles.header} />
       <ScrollView style={styles.scrollView}>
         <ThemedView style={styles.content}>
-          <Ticket delimiter={articleDelimiter} content={data} style={styles.ticket} />
+          <Ticket
+          locationString={article === null ? articleDelimiter.location : article.location}
+          mode={article === null ? articleDelimiter.mode : article.tag}
+          type={article === null ? articleDelimiter.type : article.type}
+          content={data}
+          style={styles.ticket} />
           <MarkdownRenderer
             style={styles.markdown}
             markdown={ articleStatus === 'loaded' || articleStatus === 'loading' ? markdown : ERROR_TEXT} />
@@ -84,7 +103,7 @@ export function ArticlePage() {
         style={styles.ratings}
         onChange={handleRatingChange}
         userRating={formattedUserRating} />
-        <DownloadButton available={article !== undefined} onPress={handleSavePress} />
+        <DownloadButton available={downloadable} onPress={handleSavePress} />
       </View>
     </ThemedView>
   );

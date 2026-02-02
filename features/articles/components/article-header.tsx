@@ -4,11 +4,12 @@ import { Colors } from "@/constants/theme";
 import { StyleSheet, View } from "react-native";
 
 export type ArticleHeaderProps = {
-  locationText: string;
+  locationText?: string;
   style?: object;
 };
 
 export function ArticleHeader({ locationText, style }: ArticleHeaderProps) {
+  if (!locationText) { locationText = ""; }
   const [location, locationSecondary] = locationText.split(' ; ');
   
   return (

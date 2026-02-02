@@ -2,6 +2,7 @@ import { ThemedView } from "@/components/themed-view";
 import { Colors } from "@/constants/theme";
 import { ListEntry } from "@/features/articles/components/list-entry";
 import { ArticlePreview } from "@/features/articles/types/types";
+import { useRouter } from "expo-router";
 import { FlatList, StyleSheet } from "react-native";
 import { useSavedArticles } from "../hooks/use-saved-articles";
 
@@ -11,6 +12,12 @@ export type DownloadedListProps = {
 
 export function DownloadedList({ style }: DownloadedListProps) {
   const { articles, isLoading, deleteArticle, refresh } = useSavedArticles();
+
+  const router = useRouter();
+
+  const handlePress = (articleId: number) => {
+    router.push({ pathname: "/article" , params: { id: articleId.toString() } });
+  }
   
   return (
     <ThemedView lightColor={Colors.light.background} darkColor={Colors.dark.background} style={[styles.container, style]}>
@@ -25,7 +32,7 @@ export function DownloadedList({ style }: DownloadedListProps) {
             articleId={item.articleId}
             tag={item.tag}
             onDelete={(id) => deleteArticle(id)}
-            onPress={() => {}} 
+            onPress={handlePress} 
           />
         )}
       />
@@ -37,8 +44,6 @@ const styles = StyleSheet.create({
   container: {
     borderRadius: 16,
     flexDirection: 'row',
-    borderColor: "#FFFFFF",
-    borderWidth: 1,
-    margin: 17,
+    margin: 16,
   },
 });

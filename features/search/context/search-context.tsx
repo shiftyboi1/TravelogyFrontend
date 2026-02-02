@@ -17,7 +17,7 @@ export function SearchContextProvider({ children }: { children: ReactNode }) {
   });
 
   return (
-    <SearchContext.Provider value={{ articleDelimiter, setArticleDelimiter }}>
+    <SearchContext.Provider value={{ articleDelimiter, setArticleDelimiter}}>
       {children}
     </SearchContext.Provider>
   );

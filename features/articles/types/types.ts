@@ -23,9 +23,9 @@ export type Article = {
 };
 
 export type ArticlePreview = {
-  location: string;
   tag: string;
   articleId: number;
+  location: string;
 }
 
 export type ArticleData = {
