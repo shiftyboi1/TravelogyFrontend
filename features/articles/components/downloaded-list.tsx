@@ -11,9 +11,7 @@ export type DownloadedListProps = {
 
 export function DownloadedList({ style }: DownloadedListProps) {
   const { articles, isLoading, deleteArticle, refresh } = useSavedArticles();
-
-  console.log("Downloaded articles:", articles);
-
+  
   return (
     <ThemedView lightColor={Colors.light.background} darkColor={Colors.dark.background} style={[styles.container, style]}>
       <FlatList<ArticlePreview>
