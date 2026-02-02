@@ -2,10 +2,11 @@ import { ThemedView } from "@/components/themed-view";
 import { useSessionContext } from "@/context/session-context";
 import { useSearchContext } from "@/features/search/context/search-context";
 import { useCallback, useEffect, useState } from "react";
-import { ScrollView, StyleSheet, View } from "react-native";
+import { Alert, ScrollView, StyleSheet, View } from "react-native";
 import { postArticleRating } from "../api/ratings";
 import { useArticle } from "../hooks/use-article";
 import { useRatings } from "../hooks/use-ratings";
+import { saveArticleToDevice } from "../services/article-storage";
 import { parseContent } from "../util/parseContent";
 import { ArticleHeader } from "./article-header";
 import { DownloadButton } from "./downloadButton";
@@ -53,6 +54,17 @@ export function ArticlePage() {
     setFormattedUserRating(userRating ? 'positive' : 'negative');
   }, [userRating]);
 
+  const handleSavePress = useCallback(() => {
+
+    console.log ("Save pressed");
+    if (!article) return;
+    try {
+      saveArticleToDevice(article);
+    } catch (error) {
+      Alert.alert("Error", "Failed to save article to device.");
+    }
+  }, [article]);
+
   return (
     <ThemedView style={styles.container}>
       <ArticleHeader locationText={articleDelimiter.location} style={styles.header} />
@@ -72,7 +84,7 @@ export function ArticlePage() {
         style={styles.ratings}
         onChange={handleRatingChange}
         userRating={formattedUserRating} />
-        <DownloadButton available={article !== undefined} onPress={() => {}} />
+        <DownloadButton available={article !== undefined} onPress={handleSavePress} />
       </View>
     </ThemedView>
   );

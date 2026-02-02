@@ -7,7 +7,6 @@ export function useRatings(articleId: number | undefined) {
   const [userRating, setUserRating] = useState<boolean | null>(null);
   const { userId } = useSessionContext();
 
-
   useEffect(() => {
     let isMounted = true;
     const getRatings = async () => {

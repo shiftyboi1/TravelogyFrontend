@@ -3,11 +3,18 @@ import { Colors } from "@/constants/theme";
 import { SessionProvider } from "@/context/session-context";
 import { OptionsContextProvider } from "@/features/search/context/options-context";
 import { SearchContextProvider } from "@/features/search/context/search-context";
+import { initDatabase } from "@/services/database";
 import { Stack } from "expo-router";
+import { useEffect } from "react";
 import { useColorScheme } from "react-native";
 
 export default function RootLayout() {
   const colorScheme = useColorScheme();
+
+  useEffect(() => {
+    initDatabase();
+  }, []);
+
   return (
     <ThemedView style={{ flex: 1 }}>
       <SessionProvider>

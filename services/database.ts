@@ -5,7 +5,7 @@ const db = SQLite.openDatabaseSync('travelogy.db');
 export function initDatabase() {
   db.execSync(`
     CREATE TABLE IF NOT EXISTS articles (
-      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      articleId INTEGER PRIMARY KEY NOT NULL,
       location TEXT NOT NULL,
       tag TEXT NOT NULL,
       type TEXT NOT NULL,

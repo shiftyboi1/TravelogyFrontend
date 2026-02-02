@@ -12,7 +12,7 @@ export function useSavedArticles() {
       const data = await getSavedArticlesList();
       setArticles(data);
     } catch (error) {
-      // Ignore :p
+      console.error("Failed to load articles:", error);
     } finally {
       setIsLoading(false);
     }
@@ -24,14 +24,14 @@ export function useSavedArticles() {
     }, [loadArticles])
   );
 
-  const deleteArticle = async (articleId: number) => {
+  const deleteArticle = useCallback( async (articleId: number) => {
     try {
       await deleteArticleFromStorage(articleId);
       setArticles((prevArticles) => prevArticles.filter((article) => article.articleId !== articleId));
     } catch (error) {
       // Ignore :p
     }
-  }
+  }, []);
 
   return { articles, isLoading, deleteArticle, refresh: loadArticles };
 }
