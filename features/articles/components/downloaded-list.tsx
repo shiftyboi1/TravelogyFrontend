@@ -44,6 +44,5 @@ const styles = StyleSheet.create({
   container: {
     borderRadius: 16,
     flexDirection: 'row',
-    margin: 16,
   },
 });

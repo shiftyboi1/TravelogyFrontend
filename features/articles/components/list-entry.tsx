@@ -2,6 +2,7 @@ import { ThemedSvg } from "@/components/themed-svg";
 import { ThemedText } from "@/components/themed-text";
 import { ThemedView } from "@/components/themed-view";
 import { Colors } from "@/constants/theme";
+import { useOptionsContext } from "@/features/search/context/options-context";
 import { Trash2 } from "lucide-react-native";
 import { useCallback } from "react";
 import { Pressable, StyleSheet } from "react-native";
@@ -16,7 +17,9 @@ export type ListEntryProps = {
 };
 
 export function ListEntry({ location, articleId, tag, onDelete, onPress, style }: ListEntryProps) {
-  
+
+  const { tagOptions } = useOptionsContext();
+
   const handlePress = useCallback(() => {
     onPress(articleId);
   }, [onPress, articleId]);
@@ -30,7 +33,9 @@ export function ListEntry({ location, articleId, tag, onDelete, onPress, style }
       <Pressable style={styles.leftColumn} onPress={handlePress}>
         <ThemedView lightColor={Colors.light.primary} darkColor={Colors.dark.primary} style={styles.leftColumnContent}>
           <ThemedText type="defaultBold">{location}</ThemedText>
-          <ThemedText type="subtitle">{tag}</ThemedText>
+          <ThemedText type="subtitle">
+            {location.includes(";") ? tagOptions["city"].find(opt => opt.internalText === tag)?.displayText : tagOptions["country"].find(opt => opt.internalText === tag)?.displayText}
+          </ThemedText>
         </ThemedView>
       </Pressable>
       <Pressable style={({pressed}) => [styles.deleteButton, pressed ? styles.pressed : {}]} onPress={handleDelete}>

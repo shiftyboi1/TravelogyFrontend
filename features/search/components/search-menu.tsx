@@ -12,7 +12,11 @@ import { CustomSwitch } from "./custom-switch";
 import { SearchButton } from "./search-button";
 import { SearchTrigger } from "./search-trigger";
 
-export function SearchMenu() {
+export type SearchMenuProps = {
+  style?: object;
+};
+
+export function SearchMenu({ style }: SearchMenuProps) {
   const { articleDelimiter, setArticleDelimiter } = useSearchContext();
   const { isLoading } = useSessionContext();
   const { tagOptions } = useOptionsContext();
@@ -51,7 +55,7 @@ export function SearchMenu() {
   }, [articleDelimiter, router]);
 
   return (
-    <ThemedView lightColor={Colors.light.primary} darkColor={Colors.dark.primary} style={styles.container}>
+    <ThemedView lightColor={Colors.light.primary} darkColor={Colors.dark.primary} style={[styles.container, style]}>
       <CustomSwitch callback={onSwitchChange} values={switchOpts} style={styles.switch} />
       <SearchTrigger searchedTerm={articleDelimiter.location} style={styles.trigger} />
       <CustomDropdown 
@@ -69,9 +73,8 @@ export function SearchMenu() {
 
 const styles = StyleSheet.create({
   container: {
-    borderRadius: 16,
+    // borderRadius: 16,
     padding: 16,
-    margin: 16,
     shadowColor: "#000",
     shadowOffset: { width: 0, height: -2 },
     shadowOpacity: 0.25,
