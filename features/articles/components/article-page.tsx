@@ -97,7 +97,7 @@ export function ArticlePage() {
         <Ratings
         positive={ratings.positiveRatings}
         negative={ratings.negativeRatings}
-        available={article?.articleId !== undefined}
+        available={article?.articleId !== undefined && markdown !== "NO"}
         style={styles.ratings}
         onChange={handleRatingChange}
         userRating={formattedUserRating} />
