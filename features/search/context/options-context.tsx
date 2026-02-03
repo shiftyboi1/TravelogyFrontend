@@ -41,12 +41,12 @@ export function OptionsContextProvider({ children }: { children: ReactNode }) {
             await SaveFileSystem.set(StorageLocation.DATA, DataKey.TAGS, remoteData);
           }
         } catch (e) {
-          // TODO: if init startup, do something idk yet
+          // Initial startup. Skill issue, the user is informed to connect to the internet elsewhere.
 
         }
       };
     loadData();
-    }, []); // Dependency array is empty, ensuring this runs once on mount
+    }, []); // Dependency array is empty,runs once on mount
 
   return (
     <OptionsContext.Provider value={{ tagOptions }}>

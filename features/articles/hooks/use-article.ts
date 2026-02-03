@@ -49,8 +49,6 @@ export function useArticle(articleDelimiter?: ArticleDelimiter, articleId?: numb
     if (articleDelimiter) {
       fetchAndSetArticle();
     }
-    // TODO: If an ID is provided, fetch from files.
-    // TODO: Check if article with delimiter exists in files before fetching from API.
     
     return () => { isMounted = false; };
   }, [articleDelimiter, articleId]);

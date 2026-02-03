@@ -18,7 +18,7 @@ export function parseContent(input: string): {data: ArticleData, markdown: strin
       markdown: markdownBody,
     };
   } catch (error) {
-    console.error("Failed to parse JSON block:", error);
+    // ignore
     return {
       data: {} as ArticleData,
       markdown: markdownBody,

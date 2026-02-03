@@ -18,8 +18,6 @@ export type CustomSwitchProps = {
   style?: object;
 }
 
-// TODO: Pass in a callback for when selection changes
-
 export function CustomSwitch({
   callback,
   values,

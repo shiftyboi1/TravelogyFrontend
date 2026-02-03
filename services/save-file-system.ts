@@ -37,7 +37,7 @@ export class SaveFileSystem {
       if (!file.exists) await file.create();
       await file.write(JSON.stringify({ data }));
     } catch (error) {
-      console.error(`[SaveFile] Write failed for ${location}/${key}:`, error);
+      // ignore
     }
   }
 
@@ -49,7 +49,7 @@ export class SaveFileSystem {
 
       return JSON.parse(await file.text()).data as T; 
     } catch (error) {
-       console.warn(`[FileSystemCache] Read failed for ${key}`, error);
+      // ignore
       return null;
     }
   }
@@ -60,7 +60,4 @@ export class SaveFileSystem {
       await file.delete();
     }
   }
-
-  // TODO: Fetch all content from file
-  // TODO: Remove test warnings
 }

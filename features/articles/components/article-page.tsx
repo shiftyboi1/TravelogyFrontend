@@ -67,7 +67,6 @@ export function ArticlePage() {
 
   const handleSavePress = useCallback(() => {
 
-    console.log ("Save pressed");
     if (!article) return;
     try {
       saveArticleToDevice(article);

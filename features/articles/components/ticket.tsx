@@ -73,8 +73,6 @@ export function Ticket({ locationString, mode, type, content, style }: TicketPro
 
   const { tagOptions } = useOptionsContext();
 
-  // TODO: Test this
-
   let tagText = "";
   if (type === "city") {
     tagText = tagOptions.city.find(opt => opt.internalText === mode)?.displayText || mode;

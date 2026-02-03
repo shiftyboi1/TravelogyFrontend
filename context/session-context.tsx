@@ -19,8 +19,6 @@ export function SessionProvider({children}: {children: React.ReactNode}) {
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
 
-// TODO: Handle errors
-
   useEffect(() => {
     async function initializeSession() {
 

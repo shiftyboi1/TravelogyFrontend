@@ -12,7 +12,7 @@ export function useSavedArticles() {
       const data = await getSavedArticlesList();
       setArticles(data);
     } catch (error) {
-      console.error("Failed to load articles:", error);
+      // Ignore :p
     } finally {
       setIsLoading(false);
     }
