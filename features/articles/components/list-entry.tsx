@@ -43,6 +43,7 @@ export function ListEntry({ location, articleId, tag, onDelete, onPress, style }
 const styles = StyleSheet.create({
   container: {
     borderRadius: 16,
+    marginBottom: 16,
     flexDirection: 'row',
     justifyContent: 'space-between',
   },

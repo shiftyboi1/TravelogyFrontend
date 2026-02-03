@@ -24,8 +24,8 @@ export function DownloadedList({ style }: DownloadedListProps) {
       <FlatList<ArticlePreview>
         data={articles}
         keyExtractor={(item) => item.articleId.toString()}
-        onRefresh={refresh}
-        refreshing={isLoading}
+        // onRefresh={refresh}
+        // refreshing={isLoading}
         renderItem={({ item }) => (
           <ListEntry
             location={item.location}
