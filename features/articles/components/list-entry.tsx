@@ -69,7 +69,7 @@ const styles = StyleSheet.create({
   deleteButton: {
     justifyContent: 'center',
     alignItems: 'center',
-    aspectRatio: 1,
+    width: "20%",
   },
   pressed: {
     transform: [{ scale: 0.90 }],
