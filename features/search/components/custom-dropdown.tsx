@@ -1,6 +1,8 @@
+import { ThemedSvg } from "@/components/themed-svg";
 import { ThemedView } from "@/components/themed-view";
 import { FontSizes } from "@/constants/theme";
 import { useThemeColor } from "@/hooks/useThemeColor";
+import { ChevronsRightIcon } from "lucide-react-native";
 import { useState } from "react";
 import { StyleSheet } from "react-native";
 import { Dropdown } from "react-native-element-dropdown";
@@ -29,6 +31,13 @@ export function CustomDropdown({
         labelField={labelField}
         valueField={valueField}
         placeholder={placeholderText}
+        renderLeftIcon={() => (
+          <ThemedSvg
+            icon={ChevronsRightIcon}
+            size={24}
+            style={styles.icon}
+          />
+        )}
         itemTextStyle={[styles.itemText, { color }]}
         containerStyle={[styles.itemsContainer, { backgroundColor }]}
         itemContainerStyle={[styles.itemContainer]}
@@ -79,5 +88,8 @@ const styles = StyleSheet.create({
   },
   placeholderText: {
     opacity: 0.5
+  },
+  icon: {
+    marginRight: 16,
   },
 });
