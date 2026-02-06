@@ -15,7 +15,7 @@ export default function Index() {
       }]}
     >
       <ThemedView lightColor={Colors.light.secondary} darkColor={Colors.dark.secondary} style={styles.topDiv}>
-        <ThemedText style={styles.topText} type="title">Travelogy</ThemedText>
+        <ThemedText style={styles.topText} lightColor={Colors.light.textSecondary} darkColor={Colors.dark.textSecondary} type="title">Travelogy</ThemedText>
       </ThemedView>
 
       <SearchMenu style={styles.searchMenu} />

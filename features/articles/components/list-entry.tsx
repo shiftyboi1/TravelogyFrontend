@@ -32,14 +32,14 @@ export function ListEntry({ location, articleId, tag, onDelete, onPress, style }
     <ThemedView lightColor={Colors.light.secondary} darkColor={Colors.dark.secondary} style={[styles.container, style]}>
       <Pressable style={styles.leftColumn} onPress={handlePress}>
         <ThemedView lightColor={Colors.light.primary} darkColor={Colors.dark.primary} style={styles.leftColumnContent}>
-          <ThemedText type="defaultBold">{location}</ThemedText>
-          <ThemedText type="subtitle">
+          <ThemedText lightColor={Colors.light.textSecondary} darkColor={Colors.dark.textSecondary} type="defaultBold">{location}</ThemedText>
+          <ThemedText lightColor={Colors.light.textSecondary} darkColor={Colors.dark.textSecondary} type="subtitle">
             {location.includes(";") ? tagOptions["city"].find(opt => opt.internalText === tag)?.displayText : tagOptions["country"].find(opt => opt.internalText === tag)?.displayText}
           </ThemedText>
         </ThemedView>
       </Pressable>
       <Pressable style={({pressed}) => [styles.deleteButton, pressed ? styles.pressed : {}]} onPress={handleDelete}>
-        <ThemedSvg icon={Trash2} size={32} />
+        <ThemedSvg lightColor={Colors.light.textSecondary} darkColor={Colors.dark.textSecondary} icon={Trash2} size={32} />
       </Pressable>
     </ThemedView>
   );
