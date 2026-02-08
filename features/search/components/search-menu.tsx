@@ -73,7 +73,6 @@ export function SearchMenu({ style }: SearchMenuProps) {
 
 const styles = StyleSheet.create({
   container: {
-    // borderRadius: 16,
     padding: 16,
     shadowColor: "#000",
     shadowOffset: { width: 0, height: -2 },
