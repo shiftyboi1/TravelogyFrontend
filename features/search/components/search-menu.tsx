@@ -66,7 +66,7 @@ export function SearchMenu({ style }: SearchMenuProps) {
         valueField={"internalText"}
         onChange={(item) => {}}
       />
-      {isLoading ? <ThemedText style={styles.loadingText} lightColor={Colors.light.textSecondary}>Loading...</ThemedText> : <SearchButton onPress={onPressSearch} />}
+      {isLoading ? <ThemedText type="menu" style={styles.loadingText} lightColor={Colors.light.textSecondary}>Loading...</ThemedText> : <SearchButton onPress={onPressSearch} />}
     </ThemedView>
   );
 }

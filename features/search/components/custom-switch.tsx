@@ -35,11 +35,11 @@ export function CustomSwitch({
       {values.map((item, index) => (
         <View key={index} style={{ flexDirection: 'row', alignItems: 'center' }}>
           <Pressable onPress={() => { setSelectedIndex(index); callback(index); }} style={[styles.item, (index === selectedIndex && {backgroundColor: selectColor})]}>
-            <ThemedText lightColor={index === selectedIndex ? Colors.light.textSecondary : Colors.light.text} darkColor={Colors.dark.textSecondary} order={index === selectedIndex ? 'primary' : 'secondary'}>
+            <ThemedText type="menu" lightColor={index === selectedIndex ? Colors.light.textSecondary : Colors.light.text} darkColor={Colors.dark.textSecondary} order={index === selectedIndex ? 'primary' : 'secondary'}>
               {item}
             </ThemedText>
           </Pressable>
-          {index < values.length - 1 && <ThemedText style={styles.divider}>|</ThemedText>}
+          {index < values.length - 1 && <ThemedText type="menu" style={styles.divider}>|</ThemedText>}
         </View>
       ))}
     </View>

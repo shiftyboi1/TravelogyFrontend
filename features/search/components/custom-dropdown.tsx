@@ -79,10 +79,10 @@ const styles = StyleSheet.create({
     borderRadius: 16,
   },
   itemText: {
-    fontSize: FontSizes.default,
+    fontSize: FontSizes.menu,
   },
   fieldText: {
-    fontSize: FontSizes.default,
+    fontSize: FontSizes.menu,
     height: 60,
     textAlignVertical: "center",
   },

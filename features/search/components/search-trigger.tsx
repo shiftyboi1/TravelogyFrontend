@@ -17,7 +17,7 @@ export function SearchTrigger({ searchedTerm, style }: { searchedTerm?: string; 
     <Pressable onPress={handlePress} style={style}>
       <ThemedView type="textInputContainer">
         <ThemedSvg icon={SearchIcon} size={24} style={styles.icon} />
-        <ThemedText numberOfLines={1} ellipsizeMode="tail" type="default" style={[{width: '78%'}, searchedTerm ? undefined : styles.placeholder]}>{searchedTerm || placeholderText}</ThemedText>
+        <ThemedText numberOfLines={1} ellipsizeMode="tail" type="menu" style={[{width: '78%'}, searchedTerm ? undefined : styles.placeholder]}>{searchedTerm || placeholderText}</ThemedText>
       </ThemedView>
     </Pressable>
   );
