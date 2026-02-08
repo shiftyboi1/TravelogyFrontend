@@ -21,7 +21,7 @@ export function ArticlePage() {
   const { id } = useLocalSearchParams();
   const { userId } = useSessionContext();
   const { article, articleStatus, articleLocal } = useArticle(articleDelimiter, id ? Number(id) : null);
-  const { ratings, setRatings, userRating } = useRatings(article?.articleId);
+  const { ratings, setRatings, userRating, ratingStatus } = useRatings(article?.articleId);
 
   const { data, markdown } = parseContent(article?.text || "");
 
@@ -40,7 +40,7 @@ export function ArticlePage() {
 
   const handleRatingChange = useCallback( async (currentRating: 'positive' | 'negative' | undefined, newRating: 'positive' | 'negative') => {
     if (currentRating === newRating) return;
-    if (!userId || !article?.articleId) return;
+    if (!userId || !article?.articleId || ratingStatus !== 'loaded') return;
     if (newRating === 'positive') {
       setRatings({
         positiveRatings: ratings.positiveRatings + 1,
@@ -54,8 +54,12 @@ export function ArticlePage() {
       });
       setFormattedUserRating('negative');
     }
-    postArticleRating(article!.articleId!, userId, newRating === 'positive' ? true : false);
-  }, [article, userId, ratings]);
+    try {
+    await postArticleRating(article!.articleId!, userId, newRating === 'positive' ? true : false);
+  } catch (error) {
+    Alert.alert("Error", "Failed to submit rating.");
+  }
+  }, [article, userId, ratings, ratingStatus]);
 
   useEffect(() => {
     if (userRating === null || userRating === undefined) {
@@ -96,7 +100,7 @@ export function ArticlePage() {
         <Ratings
         positive={ratings.positiveRatings}
         negative={ratings.negativeRatings}
-        available={article?.articleId !== undefined && markdown !== "NO"}
+        available={article?.articleId !== undefined && markdown !== "NO" && articleStatus === 'loaded' && ratingStatus === 'loaded'}
         style={styles.ratings}
         onChange={handleRatingChange}
         userRating={formattedUserRating} />
