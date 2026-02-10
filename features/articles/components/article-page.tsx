@@ -63,7 +63,7 @@ export function ArticlePage() {
   }, [article, userId, ratings, ratingStatus, t]);
 
   useEffect(() => {
-    if (userRating === null || userRating === undefined) {
+    if (userRating === null || userRating === undefined) {
       setFormattedUserRating(undefined);
       return;
     }
