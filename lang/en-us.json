@@ -1,10 +1,12 @@
 {
-  "text.city": "City",
-  "text.country": "Country",
-  "text.search_trigger": "Where are you going?",
-  "text.search_placeholder": "Search for a location",
-  "text.dropdown_select": "How are you going?",
-  "text.dropdown_unavailable": "No internet connection",
-  "text.search_button": "Search",
-  "text.saved_articles": "Saved Articles"
+  "values": {
+    "text.city": "City",
+    "text.country": "Country",
+    "text.search_trigger": "Where are you going?",
+    "text.search_placeholder": "Search for a location",
+    "text.dropdown_select": "How are you going?",
+    "text.dropdown_unavailable": "No internet connection",
+    "text.search_button": "Search",
+    "text.saved_articles": "Saved Articles"
+  }
 }
