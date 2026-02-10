@@ -34,7 +34,7 @@ export function SessionProvider({children}: {children: React.ReactNode}) {
         }
         if (idToBeSet === null) throw new Error(t("text.error.userid"));
         setUserId(idToBeSet);
-        setIsLoading(true);
+        setIsLoading(false);
       } catch (error) {
         setError(t("text.error.connection"));
         setUserId(null);

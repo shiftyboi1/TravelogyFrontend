@@ -38,7 +38,7 @@ export function OptionsContextProvider({ children }: { children: ReactNode }) {
 
         if (isMounted && remoteData) {
           setTagOptions(remoteData);
-            await SaveFileSystem.set(StorageLocation.DATA, DataKey.TAGS, remoteData);
+          await SaveFileSystem.set(StorageLocation.DATA, DataKey.TAGS, remoteData);
           }
         } catch (e) {
           // Initial startup. Skill issue, the user is informed to connect to the internet elsewhere.

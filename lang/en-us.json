@@ -11,6 +11,9 @@
     "text.loading": "Loading...",
     "text.unavailable": "This mode of transport is unavailable in the desired location.",
     "text.error.userid": "Failed to fetch user ID",
-    "text.error.connection": "Failed to connect. Please check your internet connection and try again."
+    "text.error.connection": "Failed to connect. Please check your internet connection and try again.",
+    "text.error.save": "Failed to save article to device.",
+    "text.error.submit": "Failed to submit rating.",
+    "text.error.connection_article": "Connection to server unavailable."
   }
 }

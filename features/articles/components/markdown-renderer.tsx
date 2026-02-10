@@ -16,8 +16,6 @@ export function MarkdownRenderer({ markdown, style }: MarkdownRendererProps) {
   const textColor = useThemeColor({}, 'text');
   const linkColor = useThemeColor({}, 'secondary');
 
-  const UNAVAILABLE_TEXT = t("text.unavailable");
-
   const markdownStyle = useMemo(() => ({
     paragraph: { fontSize: FontSizes.default, color: textColor, marginBottom: 12, textAlign: 'justify' },
     h1: { fontSize: FontSizes.header, fontWeight: 'bold', color: textColor },
@@ -29,7 +27,7 @@ export function MarkdownRenderer({ markdown, style }: MarkdownRendererProps) {
   }), [textColor]);
 
   return (<EnrichedMarkdownText
-    markdown={markdownContent === "NO" ? UNAVAILABLE_TEXT : markdownContent}
+    markdown={markdownContent === "NO" ? t("text.unavailable") : markdownContent}
     markdownStyle={markdownStyle as MarkdownStyle}
     containerStyle={style}
     isSelectable={true}  
