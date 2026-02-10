@@ -1,6 +1,7 @@
 import { ThemedSvg } from "@/components/themed-svg";
 import { ThemedView } from "@/components/themed-view";
 import { FontSizes } from "@/constants/theme";
+import { useLanguage } from "@/context/language-context";
 import { useThemeColor } from "@/hooks/useThemeColor";
 import { ChevronsRightIcon } from "lucide-react-native";
 import { useState } from "react";
@@ -16,12 +17,13 @@ export function CustomDropdown({
   callback,data,
   labelField, valueField, onChange, ...props }: CustomDropdownProps) {
   const [selectedIndex, setSelectedIndex] = useState(0);
+  const {t} = useLanguage();
   const color = useThemeColor({}, "text");
   const backgroundColor = useThemeColor({}, "background");
   const highlightColor = useThemeColor({}, "secondary");
   const subtleHighlightColor = `${highlightColor}20`; // 12.5% opacity
 
-  const placeholderText = (data && data.length > 0) ? "How are you going?" : "No internet connection.";
+  const placeholderText = (data && data.length > 0) ? t("text.dropdown_select") : t("text.dropdown_unavailable");
 
   return (
     <ThemedView style={styles.container}>

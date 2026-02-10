@@ -1,12 +1,14 @@
 import { ThemedText } from "@/components/themed-text";
 import { ThemedView } from "@/components/themed-view";
 import { Colors } from "@/constants/theme";
+import { useLanguage } from "@/context/language-context";
 import { DownloadedList } from "@/features/articles/components/downloaded-list";
 import { SearchMenu } from "@/features/search/components/search-menu";
 import { StyleSheet, useColorScheme, View } from "react-native";
 
 export default function Index() {
   const colorScheme = useColorScheme();
+  const {t} = useLanguage();
 
   return (
     <View
@@ -20,7 +22,7 @@ export default function Index() {
 
       <SearchMenu style={styles.searchMenu} />
       <View style={styles.bottomDiv}>
-        <ThemedText style={{textAlign: "center"}} type="header">Saved Articles</ThemedText>
+        <ThemedText style={{textAlign: "center"}} type="header">{t("text.saved_articles")}</ThemedText>
       </View>
       <DownloadedList style={styles.downloadedList} />
     </View>

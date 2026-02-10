@@ -1,5 +1,6 @@
 import { ThemedView } from "@/components/themed-view";
 import { FontSizes } from "@/constants/theme";
+import { useLanguage } from "@/context/language-context";
 import { useSearchContext } from "@/features/search/context/search-context";
 import { useAutocompleteOptions } from "@/features/search/hooks/useAutocomplete";
 import { useThemeColor } from "@/hooks/useThemeColor";
@@ -15,6 +16,7 @@ export function SearchScreen() {
   const textColor = useThemeColor({}, 'text');
   const placeholderColor = `${textColor}80`; // 50% opacity (80 in hex)
   const router = useRouter();
+  const {t} = useLanguage();
 
   const [input, setInput] = useState("");
   const debouncedInput = useDebouncedValue(input, 200);
@@ -44,7 +46,7 @@ export function SearchScreen() {
     <ThemedView style={[styles.container, { backgroundColor: backgroundColor }]}>
       <ThemedView style={[styles.banner, { backgroundColor: bannerBackgroundColor }]}>
         <TextInput 
-          placeholder="Search for a location" 
+          placeholder={t("text.search_placeholder")} 
           placeholderTextColor={placeholderColor}
           onChangeText={setInput}
           autoFocus={true}

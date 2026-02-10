@@ -2,12 +2,13 @@ import SearchIcon from "@/assets/svg/icons/Search";
 import { ThemedSvg } from "@/components/themed-svg";
 import { ThemedText } from "@/components/themed-text";
 import { ThemedView } from "@/components/themed-view";
+import { useLanguage } from "@/context/language-context";
 import { useRouter } from "expo-router";
 import { Pressable, StyleSheet, type StyleProp, type ViewStyle } from "react-native";
 
 export function SearchTrigger({ searchedTerm, style }: { searchedTerm?: string; style?: StyleProp<ViewStyle> }) {
   const router = useRouter();
-  const placeholderText = "Where are you going?";
+  const {t} = useLanguage();
   
   function handlePress() {
     router.push("/search");
@@ -17,7 +18,7 @@ export function SearchTrigger({ searchedTerm, style }: { searchedTerm?: string; 
     <Pressable onPress={handlePress} style={style}>
       <ThemedView type="textInputContainer">
         <ThemedSvg icon={SearchIcon} size={24} style={styles.icon} />
-        <ThemedText numberOfLines={1} ellipsizeMode="tail" type="menu" style={[{width: '78%'}, searchedTerm ? undefined : styles.placeholder]}>{searchedTerm || placeholderText}</ThemedText>
+        <ThemedText numberOfLines={1} ellipsizeMode="tail" type="menu" style={[{width: '78%'}, searchedTerm ? undefined : styles.placeholder]}>{searchedTerm || t("text.search_trigger")}</ThemedText>
       </ThemedView>
     </Pressable>
   );

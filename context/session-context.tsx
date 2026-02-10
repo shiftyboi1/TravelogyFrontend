@@ -3,6 +3,7 @@ import * as SplashScreen from "expo-splash-screen";
 import { createContext, useContext, useEffect, useState } from "react";
 import { fetchNewUserId } from "../api/session";
 import { USER_ID_STORE } from "../constants/config";
+import { useLanguage } from "./language-context";
 
 export type SessionContextType = {
   userId: number | null;
@@ -18,6 +19,7 @@ export function SessionProvider({children}: {children: React.ReactNode}) {
   const [userId, setUserId] = useState<number | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
+  const {t} = useLanguage();
 
   useEffect(() => {
     async function initializeSession() {
@@ -30,11 +32,11 @@ export function SessionProvider({children}: {children: React.ReactNode}) {
           idToBeSet = await fetchNewUserId();
           if (idToBeSet && idToBeSet !== null) await SecureStore.setItemAsync(USER_ID_STORE, String(idToBeSet));
         }
-        if (idToBeSet === null) throw new Error("Failed to obtain user ID");
+        if (idToBeSet === null) throw new Error(t("text.error.userid"));
         setUserId(idToBeSet);
-        setIsLoading(false);
+        setIsLoading(true);
       } catch (error) {
-        setError("Failed to connect. Please check your internet connection and try again.");
+        setError(t("text.error.connection"));
         setUserId(null);
         setIsLoading(false);
       }

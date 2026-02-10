@@ -3,14 +3,16 @@ import { ThemedSvg } from "@/components/themed-svg";
 import { ThemedText } from "@/components/themed-text";
 import { ThemedView } from "@/components/themed-view";
 import { Colors } from "@/constants/theme";
+import { useLanguage } from "@/context/language-context";
 import { Pressable, StyleSheet, View } from "react-native";
 
 export function SearchButton(params: { onPress?: () => void }) {
+  const {t} = useLanguage();
   return (
     <View style={styles.outerFlex}>
       <Pressable onPress={params.onPress} style={({ pressed }) => pressed ? styles.pressed : {}}>
         <ThemedView style={styles.container} lightColor={Colors.light.secondary} darkColor={Colors.dark.secondary} >
-          <ThemedText type="menu" lightColor={Colors.light.textSecondary} darkColor={Colors.dark.textSecondary} style={styles.text}>Search</ThemedText>
+          <ThemedText type="menu" lightColor={Colors.light.textSecondary} darkColor={Colors.dark.textSecondary} style={styles.text}>{t("text.search_button")}</ThemedText>
           <ThemedSvg lightColor={Colors.light.textSecondary} darkColor={Colors.dark.textSecondary} size={24} icon={searchIcon} style={styles.icon} />
         </ThemedView>
       </Pressable>

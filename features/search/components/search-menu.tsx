@@ -1,6 +1,7 @@
 import { ThemedText } from "@/components/themed-text";
 import { ThemedView } from "@/components/themed-view";
 import { Colors } from "@/constants/theme";
+import { useLanguage } from "@/context/language-context";
 import { useSessionContext } from "@/context/session-context";
 import { useRouter } from "expo-router";
 import { useCallback } from "react";
@@ -21,6 +22,7 @@ export function SearchMenu({ style }: SearchMenuProps) {
   const { isLoading } = useSessionContext();
   const { tagOptions } = useOptionsContext();
   const switchOpts = ["City", "Country"];
+  const {t} = useLanguage();
 
   const onSwitchChange = useCallback((index: number) => {
     if (index === 0) {
@@ -66,7 +68,7 @@ export function SearchMenu({ style }: SearchMenuProps) {
         valueField={"internalText"}
         onChange={(item) => {}}
       />
-      {isLoading ? <ThemedText type="menu" style={styles.loadingText} lightColor={Colors.light.textSecondary}>Loading...</ThemedText> : <SearchButton onPress={onPressSearch} />}
+      {isLoading ? <ThemedText type="menu" style={styles.loadingText} lightColor={Colors.light.textSecondary}>{t("text.loading")}</ThemedText> : <SearchButton onPress={onPressSearch} />}
     </ThemedView>
   );
 }

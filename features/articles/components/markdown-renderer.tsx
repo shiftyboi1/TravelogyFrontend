@@ -1,4 +1,5 @@
 import { FontSizes } from '@/constants/theme';
+import { useLanguage } from '@/context/language-context';
 import { useThemeColor } from '@/hooks/useThemeColor';
 import React, { useMemo } from 'react';
 import { EnrichedMarkdownText, MarkdownStyle } from 'react-native-enriched-markdown';
@@ -10,11 +11,12 @@ export type MarkdownRendererProps = {
 
 export function MarkdownRenderer({ markdown, style }: MarkdownRendererProps) {
 
-  const markdownContent = markdown || `# Loading...`;
+  const {t} = useLanguage();
+  const markdownContent = markdown || `# ` + t("text.loading");
   const textColor = useThemeColor({}, 'text');
   const linkColor = useThemeColor({}, 'secondary');
 
-  const UNAVAILABLE_TEXT = "This mode of transport is unavailable in the desired location."
+  const UNAVAILABLE_TEXT = t("text.unavailable");
 
   const markdownStyle = useMemo(() => ({
     paragraph: { fontSize: FontSizes.default, color: textColor, marginBottom: 12, textAlign: 'justify' },
