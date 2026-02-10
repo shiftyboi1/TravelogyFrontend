@@ -23,7 +23,8 @@ export const Colors = {
 export const FontSizes = {
   header: 30,
   title: 50,
-  default: 24,
+  menu: 24,
+  default: 20,
   subtitle: 20
 }
 

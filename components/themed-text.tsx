@@ -6,7 +6,7 @@ export type ThemedTextProps = TextProps & {
   lightColor?: string;
   darkColor?: string;
   order?: 'primary' | 'secondary' ;
-  type?: 'header' | 'title' | 'titleBold' | 'default' | 'defaultBold' | 'subtitle' | 'link';
+  type?: 'header' | 'menu' | 'title' | 'titleBold' | 'default' | 'defaultBold' | 'subtitle' | 'link';
 }
 
 export function ThemedText({
@@ -24,6 +24,7 @@ export function ThemedText({
     style = {[
       {color},
       type ==='header' ? {fontSize:FontSizes.header} : undefined,
+      type ==='menu' ? {fontSize:FontSizes.menu} : undefined,
       type ==='title' ? {fontSize:FontSizes.title, fontWeight:'bold'} : undefined,
       type ==='titleBold' ? {fontSize:FontSizes.title, fontWeight:'bold'} : undefined,
       type ==='default' ? {fontSize:FontSizes.default} : undefined,

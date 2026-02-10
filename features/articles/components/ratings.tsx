@@ -35,9 +35,9 @@ export function Ratings({ positive = 0, negative = 0, available = false, userRat
     <ThemedView lightColor={Colors.light.backgroundSecondary} darkColor={Colors.dark.backgroundSecondary} style={[styles.container, style]}>
       <View style={styles.leftRow}>
         <View style={styles.topRow}>
-          <ThemedText style={{ color: positive === 0 ? unavailableColor : positiveColor }}>{positive}</ThemedText>
-          <ThemedText style={{ opacity: 0.5 }}>/</ThemedText>
-          <ThemedText style={{ color: negative === 0 ? unavailableColor : negativeColor }}>{negative}</ThemedText>
+          <ThemedText type="menu" style={{ color: positive === 0 ? unavailableColor : positiveColor }}>{positive}</ThemedText>
+          <ThemedText type="menu" style={{ opacity: 0.5 }}>/</ThemedText>
+          <ThemedText type="menu" style={{ color: negative === 0 ? unavailableColor : negativeColor }}>{negative}</ThemedText>
         </View>
         <ProgressBar 
           progress={positive + negative === 0 ? 0 : positive / (positive + negative)} 

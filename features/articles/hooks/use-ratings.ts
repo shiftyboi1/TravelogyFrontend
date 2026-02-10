@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 export function useRatings(articleId: number | undefined) {
   const [ratings, setRatings] = useState<{ positiveRatings: number; negativeRatings: number }>({ positiveRatings: 0, negativeRatings: 0 });
   const [userRating, setUserRating] = useState<boolean | null>(null);
+  const [ratingStatus, setRatingStatus] = useState<'loading' | 'loaded' | 'error'>('loading');
   const { userId } = useSessionContext();
 
   useEffect(() => {
@@ -12,15 +13,22 @@ export function useRatings(articleId: number | undefined) {
     const getRatings = async () => {
       try {
         if (!articleId) {
-          if (isMounted) setRatings({ positiveRatings: 0, negativeRatings: 0 });
+          if (isMounted) {
+            setRatings({ positiveRatings: 0, negativeRatings: 0 })
+            setRatingStatus('error');
+          };
           return;
         }
         const data = await fetchArticleRatings(articleId);
         if (data && isMounted) {
           setRatings({ positiveRatings: data.positiveRatings, negativeRatings: data.negativeRatings });
+          setRatingStatus('loaded');
         }
       } catch (error) {
-        if (isMounted) setRatings({ positiveRatings: 0, negativeRatings: 0 });
+        if (isMounted) {
+          setRatings({ positiveRatings: 0, negativeRatings: 0 });
+          setRatingStatus('error');
+        }
       }
     };
     getRatings();
@@ -51,5 +59,5 @@ export function useRatings(articleId: number | undefined) {
     };
   }, [articleId, userId]);
 
-  return { ratings, setRatings, userRating };
+  return { ratings, setRatings, userRating, ratingStatus };
 }
