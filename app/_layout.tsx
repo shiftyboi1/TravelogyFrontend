@@ -18,8 +18,8 @@ export default function RootLayout() {
 
   return (
     <ThemedView style={{ flex: 1 }}>
-      <SessionProvider>
-        <LanguageProvider>
+      <LanguageProvider>
+        <SessionProvider>
           <OptionsContextProvider>
             <SearchContextProvider>
               <Stack>
@@ -45,8 +45,8 @@ export default function RootLayout() {
               </Stack>
             </SearchContextProvider>
           </OptionsContextProvider>
-        </LanguageProvider>
-      </SessionProvider>
+        </SessionProvider>
+      </LanguageProvider>
     </ThemedView>
   );
 }
