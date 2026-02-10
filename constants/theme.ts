@@ -29,7 +29,7 @@ export const FontSizes = {
 }
 
 export const PriceColors = {
-  LOW: '#4CAF50',      // Green
-  MID: '#FF7F50',   // Amber
-  HIGH: '#F44336'      // Red
+  LOW: '#4CAF50',
+  MID: '#FF7F50',
+  HIGH: '#F44336'
 }

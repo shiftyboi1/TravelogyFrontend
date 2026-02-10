@@ -26,10 +26,12 @@ export function useArticle(articleDelimiter?: ArticleDelimiter, articleId?: numb
         setArticle(localArticle);
         setArticleLocal(true);
         setArticleStatus('loaded');
+
+        // TODO: Check for update here
         return;
       }
       
-      if (!articleDelimiter || articleDelimiter.location === "" || articleDelimiter.mode === "")  return;
+      if (!articleDelimiter || articleDelimiter.location === "" || articleDelimiter.mode === "")  return;
 
       try {
         if (isMounted) setArticleStatus('loading');
