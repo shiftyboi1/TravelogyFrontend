@@ -10,6 +10,8 @@
     "text.saved_articles": "Saved Articles",
     "text.loading": "Loading...",
     "text.unavailable": "This mode of transport is unavailable in the desired location.",
+    "text.article_update_title": "Update Available",
+    "text.article_update_message": "A newer version of this article has been downloaded.",
     "text.error.userid": "Failed to fetch user ID",
     "text.error.connection": "Failed to connect. Please check your internet connection and try again.",
     "text.error.save": "Failed to save article to device.",

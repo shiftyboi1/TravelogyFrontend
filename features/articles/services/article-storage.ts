@@ -42,3 +42,10 @@ export const saveArticleToDevice = async (article: Article) => {
     [article.articleId, article.location, article.tag, article.type, article.language, article.version, article.text]
   );
 };
+
+export const updateSavedArticle = async (article: Article) => {
+  await db.runAsync(
+    'UPDATE articles SET location = ?, tag = ?, type = ?, language = ?, version = ?, text = ? WHERE articleId = ?',
+    [article.location, article.tag, article.type, article.language, article.version, article.text, article.articleId]
+  );
+};

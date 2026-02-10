@@ -1,6 +1,8 @@
+import { useLanguage } from "@/context/language-context";
 import { useEffect, useState } from "react";
-import { fetchArticle } from "../api/articles";
-import { getSavedArticleByDelimiter, getSavedArticleById } from "../services/article-storage";
+import { Alert } from "react-native";
+import { fetchArticle, fetchArticleUpdate } from "../api/articles";
+import { getSavedArticleByDelimiter, getSavedArticleById, updateSavedArticle } from "../services/article-storage";
 import { Article, ArticleDelimiter } from "../types/types";
 
 
@@ -8,6 +10,7 @@ export function useArticle(articleDelimiter?: ArticleDelimiter, articleId?: numb
   const [article, setArticle] = useState<Article | null>(null);
   const [articleStatus, setArticleStatus] = useState<'loading' | 'error' | 'loaded'>('loading');
   const [articleLocal, setArticleLocal] = useState<boolean>(false);
+  const { t } = useLanguage();
 
   useEffect(() => {
     let isMounted = true;
@@ -27,7 +30,17 @@ export function useArticle(articleDelimiter?: ArticleDelimiter, articleId?: numb
         setArticleLocal(true);
         setArticleStatus('loaded');
 
-        // TODO: Check for update here
+        try {
+          const updatedArticle = await fetchArticleUpdate(localArticle.articleId!, localArticle.version);
+          if (updatedArticle && isMounted && updatedArticle.version > localArticle.version) {
+            Alert.alert(t("text.article_update_title"), t("text.article_update_message"));
+            console.log("Article updated from version", localArticle.version, "to", updatedArticle.version);
+            setArticle(updatedArticle);
+            await updateSavedArticle(updatedArticle);
+          }
+        } catch (error) {
+          // Ignore :p
+        }
         return;
       }
       

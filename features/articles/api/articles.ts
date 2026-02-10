@@ -14,3 +14,12 @@ export async function fetchArticle(articleDelimiter: ArticleDelimiter): Promise<
     body: JSON.stringify(articleDelimiterDto),
   });
 }
+
+export async function fetchArticleUpdate(id: number, currentVersion: number): Promise<Article | null> {
+  try {
+    return await client<Article>(`/article/version/${id}/${currentVersion}`);
+  } catch (error) {
+    console.log("Failed to fetch article update:", error);
+    return null;
+  }
+}
