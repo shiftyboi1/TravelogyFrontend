@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "TravelogyFrontend",
-    "slug": "TravelogyFrontend",
+    "name": "Travelogy",
+    "slug": "Travelogy",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
